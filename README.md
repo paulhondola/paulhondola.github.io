@@ -1,46 +1,54 @@
-# Astro Starter Kit: Basics
+# paulhondola.github.io
+
+Personal portfolio site built with Astro, Tailwind CSS v4, and React.
+
+Live at [paulhondola.github.io](https://paulhondola.github.io)
+
+## Stack
+
+- **Astro 7** — static site generation, `.astro` components
+- **Tailwind CSS v4** — via `@tailwindcss/vite`, `@theme` tokens, `@utility` blocks
+- **React 19** — used only for the Navbar (scroll state + mobile menu)
+- **lucide-react** — icons, SSR-only (no client JS)
+- **Bun** — package manager and runtime
+
+## Dev
 
 ```sh
-bun create astro@latest -- --template basics
+bun install
+bun run dev        # http://localhost:4321
+bun run build      # output → dist/
+bun run preview    # preview dist/ locally
+bun run check      # TypeScript / Astro type check
+bun run format     # prettier --write
+bun run format:check  # prettier --check (runs in CI)
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Structure
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/
+│   ├── Navbar.tsx       # React island (client:load)
+│   ├── Hero.astro
+│   ├── Experience.astro
+│   ├── Projects.astro
+│   ├── Skills.astro
+│   └── Contact.astro
+├── layouts/
+│   └── Layout.astro     # base HTML, IntersectionObserver reveal
+├── pages/
+│   └── index.astro
+└── styles/
+    └── global.css       # Tailwind @theme tokens + @utility blocks
+public/
+└── Paul_Hondola_CV.pdf
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Deploy
 
-## 🧞 Commands
+Pushes to `main` auto-deploy via GitHub Actions (`.github/workflows/deploy.yml`):
 
-All commands are run from the root of the project, from a terminal:
-
-| Command               | Action                                           |
-| :-------------------- | :----------------------------------------------- |
-| `bun install`         | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+1. **check** — `astro check` + `prettier --check`
+2. **build** — `bun run build` → uploads `dist/`
+3. **deploy** — publishes to GitHub Pages
