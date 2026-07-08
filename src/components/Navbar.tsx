@@ -21,10 +21,11 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-          ? "bg-zinc-950/80 backdrop-blur-2xl border-b border-zinc-800/60 shadow-lg shadow-black/20"
-          : "bg-transparent border-b border-transparent"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-zinc-950/80 backdrop-blur-2xl border-b border-zinc-800/60 shadow-lg shadow-black/20"
+            : "bg-transparent border-b border-transparent"
+        }`}
       >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="#" className="relative group">
@@ -58,15 +59,22 @@ const Navbar = () => {
             className="md:hidden text-zinc-400 hover:text-zinc-100 transition-colors p-2"
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
           </button>
         </div>
       </nav>
 
       {/* Mobile menu — CSS transition, no framer-motion */}
       <div
-        className={`fixed top-16 left-0 right-0 z-40 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/60 p-6 md:hidden transition-all duration-200 ${mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
-          }`}
+        className={`fixed top-16 left-0 right-0 z-40 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/60 p-6 md:hidden transition-all duration-200 ${
+          mobileOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-2 pointer-events-none"
+        }`}
       >
         <div className="flex flex-col gap-1">
           {navLinks.map((link) => (

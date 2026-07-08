@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
   --color-primary-50: #eff6ff;
   --color-primary-100: #dbeafe;
@@ -16,17 +16,20 @@
   --animate-float: float 20s ease-in-out infinite;
   --animate-marquee-slow: marquee-down 30s linear infinite;
   --animate-marquee-slow-reverse: marquee-up 25s linear infinite;
-  --animate-fade-in-left-1: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1) both 0.30s;
-  --animate-fade-in-left-2: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1) both 0.45s;
-  --animate-fade-in-left-3: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1) both 0.60s;
-  --animate-fade-in-left-4: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1) both 0.75s;
-  --animate-fade-in-hero: fade-in 1.0s ease both 0.50s;
+  --animate-fade-in-left-1: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1)
+    both 0.3s;
+  --animate-fade-in-left-2: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1)
+    both 0.45s;
+  --animate-fade-in-left-3: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1)
+    both 0.6s;
+  --animate-fade-in-left-4: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1)
+    both 0.75s;
+  --animate-fade-in-hero: fade-in 1s ease both 0.5s;
   --animate-bob-down: bob-down 6s ease-in-out infinite;
   --animate-bob-up: bob-up 5s ease-in-out infinite 1s;
 
   /* Keyframes */
   --keyframes-float: {
-
     0%,
     100% {
       transform: translate(0, 0) scale(1);
@@ -43,9 +46,7 @@
     75% {
       transform: translate(15px, 35px) scale(1.02);
     }
-  }
-
-  ;
+  };
 
   --keyframes-marquee-down: {
     0% {
@@ -55,9 +56,7 @@
     100% {
       transform: translateY(-50%);
     }
-  }
-
-  ;
+  };
 
   --keyframes-marquee-up: {
     0% {
@@ -67,9 +66,7 @@
     100% {
       transform: translateY(0);
     }
-  }
-
-  ;
+  };
 
   --keyframes-fade-in-left: {
     from {
@@ -81,9 +78,7 @@
       opacity: 1;
       transform: none;
     }
-  }
-
-  ;
+  };
 
   --keyframes-fade-in: {
     from {
@@ -93,12 +88,9 @@
     to {
       opacity: 1;
     }
-  }
-
-  ;
+  };
 
   --keyframes-bob-down: {
-
     0%,
     100% {
       transform: translateY(-10px);
@@ -107,12 +99,9 @@
     50% {
       transform: translateY(10px);
     }
-  }
-
-  ;
+  };
 
   --keyframes-bob-up: {
-
     0%,
     100% {
       transform: translateY(10px);
@@ -121,9 +110,7 @@
     50% {
       transform: translateY(-10px);
     }
-  }
-
-  ;
+  };
 }
 
 @layer base {
@@ -178,7 +165,12 @@
 
 @utility text-gradient {
   @apply bg-clip-text text-transparent;
-  background-image: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #a78bfa 100%);
+  background-image: linear-gradient(
+    135deg,
+    #60a5fa 0%,
+    #818cf8 50%,
+    #a78bfa 100%
+  );
 }
 
 @utility hover-lift {
@@ -196,14 +188,18 @@
   @apply relative inline-block;
 
   &::after {
-    content: '';
+    content: "";
     @apply absolute -bottom-3 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full;
     width: 3rem;
   }
 }
 
 @utility dot-grid {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px
+  );
   background-size: 32px 32px;
 }
 
@@ -219,7 +215,9 @@
 [data-reveal] {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 
   &[data-reveal="left"] {
     transform: translateX(-20px);

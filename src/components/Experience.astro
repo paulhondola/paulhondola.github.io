@@ -1,109 +1,124 @@
 ---
-import { Briefcase, Calendar } from 'lucide-react';
+import { Briefcase, Calendar } from "lucide-react";
 
 const experiences = [
   {
-    role: 'Software Engineer Intern',
-    company: 'Nokia',
-    period: 'Mar 2026 — Present',
+    role: "Software Engineer Intern",
+    company: "Nokia",
+    period: "Mar 2026 — Present",
     description: [
-      'Profiled and optimized data-processing Python scripts, reducing end-to-end runtime by 50% through algorithmic refactoring and NumPy vectorization.',
-      'Contributed to the Mobile Infrastructure Metrics Automation platform, developing ETL scripts and automated test pipelines.',
-      'Enhanced CI/CD pipelines using Jenkins and Docker for scalable metric processing and analysis.',
-      'Maintained and improved interactive Power BI dashboards to surface key metrics and KPIs.',
+      "Profiled and optimized data-processing Python scripts, reducing end-to-end runtime by 50% through algorithmic refactoring and NumPy vectorization.",
+      "Contributed to the Mobile Infrastructure Metrics Automation platform, developing ETL scripts and automated test pipelines.",
+      "Enhanced CI/CD pipelines using Jenkins and Docker for scalable metric processing and analysis.",
+      "Maintained and improved interactive Power BI dashboards to surface key metrics and KPIs.",
       "Contributed reusable modules to the team's shared core library, extending functionality across multiple internal automation projects.",
     ],
-    tech: ['Python', 'Jenkins', 'Docker', 'Power BI', 'NumPy', 'Pandas'],
+    tech: ["Python", "Jenkins", "Docker", "Power BI", "NumPy", "Pandas"],
   },
   {
-    role: 'Full Stack Developer Intern',
-    company: 'Hibyte',
-    period: 'Jul 2025 — Oct 2025',
+    role: "Full Stack Developer Intern",
+    company: "Hibyte",
+    period: "Jul 2025 — Oct 2025",
     description: [
       "Engineered 'GameBox', a full-stack monorepo for game center management, integrating a customer-facing web app with an admin CMS.",
-      'Built a responsive frontend architecture using Angular, TypeScript, and SCSS.',
-      'Developed a backend system using NestJS and Payload CMS, leveraging Supabase for secure authentication and real-time database operations.',
+      "Built a responsive frontend architecture using Angular, TypeScript, and SCSS.",
+      "Developed a backend system using NestJS and Payload CMS, leveraging Supabase for secure authentication and real-time database operations.",
     ],
-    tech: ['TypeScript', 'Angular', 'NestJS', 'Payload CMS', 'Supabase'],
+    tech: ["TypeScript", "Angular", "NestJS", "Payload CMS", "Supabase"],
   },
   {
-    role: 'Malware Analyst Trainee',
-    company: 'Bitdefender',
-    period: 'Apr 2025 — Jun 2025',
+    role: "Malware Analyst Trainee",
+    company: "Bitdefender",
+    period: "Apr 2025 — Jun 2025",
     description: [
-      'Conducted static and dynamic analysis of Windows and Android malware samples to identify C&C protocols and persistence mechanisms.',
-      'Reverse engineered ransomware encryption routines using IDA Pro (x86 disassembly) and jadx (Java decompilation).',
-      'Investigated Android system vulnerabilities and exploitation techniques, analyzing APK structures and security models in sandboxed environments.',
+      "Conducted static and dynamic analysis of Windows and Android malware samples to identify C&C protocols and persistence mechanisms.",
+      "Reverse engineered ransomware encryption routines using IDA Pro (x86 disassembly) and jadx (Java decompilation).",
+      "Investigated Android system vulnerabilities and exploitation techniques, analyzing APK structures and security models in sandboxed environments.",
     ],
-    tech: ['Java', 'Python', 'C', 'x86 Assembly', 'IDA Pro', 'jadx'],
+    tech: ["Java", "Python", "C", "x86 Assembly", "IDA Pro", "jadx"],
   },
 ];
 ---
 
-<section id="experience" class="pt-8 pb-24 md:py-28 px-4 md:px-6 relative overflow-hidden">
+<section
+  id="experience"
+  class="pt-8 pb-24 md:py-28 px-4 md:px-6 relative overflow-hidden"
+>
   <div class="max-w-6xl mx-auto w-full">
-
     <div data-reveal class="mb-10 md:mb-16">
-      <p class="text-blue-400 text-sm font-medium tracking-wider uppercase mb-3">Career</p>
+      <p
+        class="text-blue-400 text-sm font-medium tracking-wider uppercase mb-3"
+      >
+        Career
+      </p>
       <h2 class="text-4xl md:text-5xl font-bold text-zinc-100">Experience</h2>
     </div>
 
     <div class="relative max-w-4xl mx-auto md:mx-0">
-      <div class="absolute left-[27px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-blue-500/50 via-zinc-800 to-transparent"></div>
+      <div
+        class="absolute left-[27px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-blue-500/50 via-zinc-800 to-transparent"
+      >
+      </div>
 
       <div class="space-y-10">
-        {experiences.map((exp, index) => (
-          <div
-            data-reveal="left"
-            style={`transition-delay: ${index * 0.1}s`}
-            class="relative pl-14 md:pl-20 group"
-          >
-            <!-- Timeline dot -->
-            <div class="absolute left-[12px] top-6 z-10 flex items-center justify-center w-8 h-8 rounded-full border-2 border-zinc-700 bg-zinc-950 group-hover:border-blue-500 group-hover:bg-blue-500/10 transition-all duration-500 shadow-lg shadow-black">
-              <span class="text-[10px] font-bold text-zinc-500 group-hover:text-blue-400 transition-colors duration-500">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-            </div>
-
-            <!-- Card -->
-            <div class="relative bg-zinc-900/50 backdrop-blur-md border border-zinc-800/60 rounded-2xl p-5 md:p-6 hover:translate-x-1 transition-all duration-500 shadow-lg shadow-black/20 overflow-hidden">
-              <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-400 via-blue-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-              <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-5">
-                <div class="flex items-start gap-3">
-                  <div class="mt-1 flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 shrink-0 text-blue-400">
-                    <Briefcase className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h3 class="text-lg font-bold text-zinc-100 leading-tight">{exp.role}</h3>
-                    <span class="text-blue-400 font-medium text-sm">{exp.company}</span>
-                  </div>
-                </div>
-                <div class="flex items-center gap-1.5 text-xs font-medium text-zinc-400 bg-zinc-950/50 px-3 py-1.5 rounded-full border border-zinc-800/50 w-fit shrink-0">
-                  <Calendar className="w-3.5 h-3.5" />
-                  {exp.period}
-                </div>
+        {
+          experiences.map((exp, index) => (
+            <div
+              data-reveal="left"
+              style={`transition-delay: ${index * 0.1}s`}
+              class="relative pl-14 md:pl-20 group"
+            >
+              {/* Timeline dot */}
+              <div class="absolute left-[12px] top-6 z-10 flex items-center justify-center w-8 h-8 rounded-full border-2 border-zinc-700 bg-zinc-950 group-hover:border-blue-500 group-hover:bg-blue-500/10 transition-all duration-500 shadow-lg shadow-black">
+                <span class="text-[10px] font-bold text-zinc-500 group-hover:text-blue-400 transition-colors duration-500">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
               </div>
 
-              <ul class="space-y-2.5 mb-6">
-                {exp.description.map((bullet) => (
-                  <li class="text-zinc-400 text-sm leading-relaxed flex items-start gap-2.5">
-                    <span class="text-blue-500/50 mt-1 text-[10px]">▹</span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* Card */}
+              <div class="relative bg-zinc-900/50 backdrop-blur-md border border-zinc-800/60 rounded-2xl p-5 md:p-6 hover:translate-x-1 transition-all duration-500 shadow-lg shadow-black/20 overflow-hidden">
+                <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-400 via-blue-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div class="flex flex-wrap gap-2">
-                {exp.tech.map((t) => (
-                  <span class="text-xs font-mono font-medium text-zinc-400 bg-zinc-950 px-2.5 py-1.5 rounded border border-zinc-800">
-                    {t}
-                  </span>
-                ))}
+                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-5">
+                  <div class="flex items-start gap-3">
+                    <div class="mt-1 flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 shrink-0 text-blue-400">
+                      <Briefcase className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h3 class="text-lg font-bold text-zinc-100 leading-tight">
+                        {exp.role}
+                      </h3>
+                      <span class="text-blue-400 font-medium text-sm">
+                        {exp.company}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-xs font-medium text-zinc-400 bg-zinc-950/50 px-3 py-1.5 rounded-full border border-zinc-800/50 w-fit shrink-0">
+                    <Calendar className="w-3.5 h-3.5" />
+                    {exp.period}
+                  </div>
+                </div>
+
+                <ul class="space-y-2.5 mb-6">
+                  {exp.description.map((bullet) => (
+                    <li class="text-zinc-400 text-sm leading-relaxed flex items-start gap-2.5">
+                      <span class="text-blue-500/50 mt-1 text-[10px]">▹</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="flex flex-wrap gap-2">
+                  {exp.tech.map((t) => (
+                    <span class="text-xs font-mono font-medium text-zinc-400 bg-zinc-950 px-2.5 py-1.5 rounded border border-zinc-800">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </div>

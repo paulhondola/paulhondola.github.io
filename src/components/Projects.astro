@@ -1,52 +1,58 @@
 ---
 const projects = [
   {
-    title: 'Vibecodium',
-    badge: '1st Place — iTEC 2026 Web Dev',
-    description: 'Collaborative browser-based IDE with real-time multi-user editing (Yjs CRDT), an AI coding assistant via SSE streaming, sandboxed Docker execution, GitHub integration, and one-click Vercel deploys.',
-    tech: ['React', 'Hono', 'Bun', 'Supabase', 'Docker', 'Vercel'],
-    github: 'https://github.com/paulhondola/vibecodium',
-    live: '',
+    title: "Vibecodium",
+    badge: "1st Place — iTEC 2026 Web Dev",
+    description:
+      "Collaborative browser-based IDE with real-time multi-user editing (Yjs CRDT), an AI coding assistant via SSE streaming, sandboxed Docker execution, GitHub integration, and one-click Vercel deploys.",
+    tech: ["React", "Hono", "Bun", "Supabase", "Docker", "Vercel"],
+    github: "https://github.com/paulhondola/vibecodium",
+    live: "",
   },
   {
-    title: 'Smart Shopping Assistant',
-    badge: 'Full-Stack · LigaAC Labs × NetRom',
-    description: 'Full-stack e-commerce platform with an AI-powered agentic cart analyzer. Sequential two-agent LLM pipeline detecting promotions and composing personalized recommendations. Layered ASP.NET Core backend over PostgreSQL with JWT RBAC.',
-    tech: ['React 19', 'TypeScript', 'ASP.NET Core', 'PostgreSQL', 'OpenAI'],
-    github: 'https://github.com/paulhondola/Smart-Shopping-Assistant',
-    live: '',
+    title: "Smart Shopping Assistant",
+    badge: "Full-Stack · LigaAC Labs × NetRom",
+    description:
+      "Full-stack e-commerce platform with an AI-powered agentic cart analyzer. Sequential two-agent LLM pipeline detecting promotions and composing personalized recommendations. Layered ASP.NET Core backend over PostgreSQL with JWT RBAC.",
+    tech: ["React 19", "TypeScript", "ASP.NET Core", "PostgreSQL", "OpenAI"],
+    github: "https://github.com/paulhondola/Smart-Shopping-Assistant",
+    live: "",
   },
   {
-    title: 'ArchLens Analyzer',
-    badge: 'CLI Tool · Reverse Engineering',
-    description: 'Polyglot CLI tool (Python orchestrator + Java/C# backends) that reverse-engineers compiled binaries (.jar, .dll) into UML class diagrams via runtime reflection. Outputs PlantUML and yUML across a Maven and .NET monorepo.',
-    tech: ['Python', 'Java', 'C#'],
-    github: 'https://github.com/paulhondola/archlens',
-    live: '',
+    title: "ArchLens Analyzer",
+    badge: "CLI Tool · Reverse Engineering",
+    description:
+      "Polyglot CLI tool (Python orchestrator + Java/C# backends) that reverse-engineers compiled binaries (.jar, .dll) into UML class diagrams via runtime reflection. Outputs PlantUML and yUML across a Maven and .NET monorepo.",
+    tech: ["Python", "Java", "C#"],
+    github: "https://github.com/paulhondola/archlens",
+    live: "",
   },
   {
-    title: 'AtomC Compiler',
-    badge: 'Compiler Design',
-    description: 'Recursive-descent compiler frontend for a C-like language written from scratch in C. Implements lexical analysis, tokenization, a semantic analyzer, a stack-based VM, and code generator. Full CI pipeline with integration test suites.',
-    tech: ['C', 'Meson'],
-    github: 'https://github.com/paulhondola/atomc-compiler',
-    live: '',
+    title: "AtomC Compiler",
+    badge: "Compiler Design",
+    description:
+      "Recursive-descent compiler frontend for a C-like language written from scratch in C. Implements lexical analysis, tokenization, a semantic analyzer, a stack-based VM, and code generator. Full CI pipeline with integration test suites.",
+    tech: ["C", "Meson"],
+    github: "https://github.com/paulhondola/atomc-compiler",
+    live: "",
   },
   {
-    title: 'Distributed Image Processing System',
-    badge: 'High Performance Computing',
-    description: 'Hybrid parallel image processing engine using MPI for distributed memory and OpenMP for shared memory. Architectures include multithreaded, message passing, shared filesystem, producer-consumer task pool, and full hybrid parallelism. Python benchmarking suite with scaling analysis.',
-    tech: ['C', 'MPI', 'OpenMP', 'Python', 'Assembly'],
-    github: 'https://github.com/paulhondola/MPI-OpenMP-Image-Processing',
-    live: '',
+    title: "Distributed Image Processing System",
+    badge: "High Performance Computing",
+    description:
+      "Hybrid parallel image processing engine using MPI for distributed memory and OpenMP for shared memory. Architectures include multithreaded, message passing, shared filesystem, producer-consumer task pool, and full hybrid parallelism. Python benchmarking suite with scaling analysis.",
+    tech: ["C", "MPI", "OpenMP", "Python", "Assembly"],
+    github: "https://github.com/paulhondola/MPI-OpenMP-Image-Processing",
+    live: "",
   },
   {
-    title: 'Parallel DMM Benchmark',
-    badge: 'High Performance Computing',
-    description: 'Benchmarking suite for dense matrix multiplication implementing serial and parallel algorithms with OpenMP. Covers loop permutations, cache blocking (tiling), and SIMD vectorization validated by inspecting generated assembly across compiler optimization levels.',
-    tech: ['C', 'OpenMP', 'Python', 'Assembly'],
-    github: 'https://github.com/paulhondola/OpenMP-Dense-Matrix-Multiplication',
-    live: '',
+    title: "Parallel DMM Benchmark",
+    badge: "High Performance Computing",
+    description:
+      "Benchmarking suite for dense matrix multiplication implementing serial and parallel algorithms with OpenMP. Covers loop permutations, cache blocking (tiling), and SIMD vectorization validated by inspecting generated assembly across compiler optimization levels.",
+    tech: ["C", "OpenMP", "Python", "Assembly"],
+    github: "https://github.com/paulhondola/OpenMP-Dense-Matrix-Multiplication",
+    live: "",
   },
 ];
 
@@ -56,81 +62,113 @@ const externalSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
 
 <section id="work" class="py-28 px-6 relative">
   <div class="max-w-6xl mx-auto">
-
     <div data-reveal class="mb-16">
-      <p class="text-indigo-400 text-sm font-medium tracking-wider uppercase mb-3">Portfolio</p>
-      <h2 class="text-4xl md:text-5xl font-bold section-heading">Featured Work</h2>
+      <p
+        class="text-indigo-400 text-sm font-medium tracking-wider uppercase mb-3"
+      >
+        Portfolio
+      </p>
+      <h2 class="text-4xl md:text-5xl font-bold section-heading">
+        Featured Work
+      </h2>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6">
-      {projects.map((project, index) => (
-        <div
-          data-reveal
-          style={`transition-delay: ${index * 0.07}s`}
-          class="spotlight-card glass-panel rounded-2xl flex flex-col group hover:border-blue-500/30 transition-colors duration-500 overflow-hidden"
-        >
-          <!-- Spotlight gradient overlay (position set by JS) -->
-          <div class="spotlight-glow absolute inset-0 z-0 pointer-events-none opacity-0 transition-opacity duration-500" aria-hidden="true"></div>
+      {
+        projects.map((project, index) => (
+          <div
+            data-reveal
+            style={`transition-delay: ${index * 0.07}s`}
+            class="spotlight-card glass-panel rounded-2xl flex flex-col group hover:border-blue-500/30 transition-colors duration-500 overflow-hidden"
+          >
+            {/* Spotlight gradient overlay (position set by JS) */}
+            <div
+              class="spotlight-glow absolute inset-0 z-0 pointer-events-none opacity-0 transition-opacity duration-500"
+              aria-hidden="true"
+            />
 
-          <!-- Image placeholder -->
-          <div class="relative w-full aspect-video overflow-hidden bg-zinc-900 border-b border-zinc-800/50 shrink-0 flex items-center justify-center z-10">
-            <span class="text-zinc-700 text-sm font-mono">[16:9 preview]</span>
-          </div>
+            {/* Image placeholder */}
+            <div class="relative w-full aspect-video overflow-hidden bg-zinc-900 border-b border-zinc-800/50 shrink-0 flex items-center justify-center z-10">
+              <span class="text-zinc-700 text-sm font-mono">
+                [16:9 preview]
+              </span>
+            </div>
 
-          <!-- Content -->
-          <div class="relative z-10 p-6 md:p-7 flex flex-col flex-grow">
-            <div class="flex items-start justify-between mb-4">
-              <div class="flex-1">
-                <div class="flex items-center gap-3 mb-2">
-                  <span class="text-xs font-mono text-zinc-600 tracking-wider">
-                    {String(index + 1).padStart(2, '0')}
+            {/* Content */}
+            <div class="relative z-10 p-6 md:p-7 flex flex-col flex-grow">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="text-xs font-mono text-zinc-600 tracking-wider">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 class="text-xl font-bold text-zinc-100 group-hover:text-white transition-colors">
+                      {project.title}
+                    </h3>
+                  </div>
+                  <span class="inline-block text-xs font-medium px-2.5 py-1 bg-blue-500/8 text-blue-400 rounded-md border border-blue-500/15">
+                    {project.badge}
                   </span>
-                  <h3 class="text-xl font-bold text-zinc-100 group-hover:text-white transition-colors">
-                    {project.title}
-                  </h3>
                 </div>
-                <span class="inline-block text-xs font-medium px-2.5 py-1 bg-blue-500/8 text-blue-400 rounded-md border border-blue-500/15">
-                  {project.badge}
-                </span>
+                <div class="flex items-center gap-2 ml-4">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="text-zinc-600 hover:text-zinc-300 transition-colors duration-300 p-1.5 rounded-lg hover:bg-zinc-800/50 w-7 h-7"
+                    set:html={githubSvg}
+                  />
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="text-zinc-600 hover:text-zinc-300 transition-colors duration-300 p-1.5 rounded-lg hover:bg-zinc-800/50 w-7 h-7"
+                      set:html={externalSvg}
+                    />
+                  )}
+                </div>
               </div>
-              <div class="flex items-center gap-2 ml-4">
-                <a href={project.github} target="_blank" rel="noreferrer" class="text-zinc-600 hover:text-zinc-300 transition-colors duration-300 p-1.5 rounded-lg hover:bg-zinc-800/50 w-7 h-7" set:html={githubSvg} />
-                {project.live && (
-                  <a href={project.live} target="_blank" rel="noreferrer" class="text-zinc-600 hover:text-zinc-300 transition-colors duration-300 p-1.5 rounded-lg hover:bg-zinc-800/50 w-7 h-7" set:html={externalSvg} />
-                )}
+
+              <p class="text-zinc-400 text-sm leading-relaxed flex-grow mb-6">
+                {project.description}
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 mt-auto pt-4 border-t border-zinc-800/40">
+                {project.tech.map((tech) => (
+                  <span class="text-xs font-medium text-zinc-500 bg-zinc-950/50 px-2.5 py-1 rounded-md border border-zinc-800/40 hover:text-zinc-300 hover:border-zinc-700 transition-colors duration-300">
+                    {tech}
+                  </span>
+                ))}
               </div>
-            </div>
-
-            <p class="text-zinc-400 text-sm leading-relaxed flex-grow mb-6">{project.description}</p>
-
-            <div class="flex flex-wrap gap-1.5 mt-auto pt-4 border-t border-zinc-800/40">
-              {project.tech.map((tech) => (
-                <span class="text-xs font-medium text-zinc-500 bg-zinc-950/50 px-2.5 py-1 rounded-md border border-zinc-800/40 hover:text-zinc-300 hover:border-zinc-700 transition-colors duration-300">
-                  {tech}
-                </span>
-              ))}
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
 
 <script>
-  document.querySelectorAll<HTMLElement>('.spotlight-card').forEach(card => {
-    const glow = card.querySelector<HTMLElement>('.spotlight-glow')!;
-    card.addEventListener('mousemove', (e) => {
+  document.querySelectorAll<HTMLElement>(".spotlight-card").forEach((card) => {
+    const glow = card.querySelector<HTMLElement>(".spotlight-glow")!;
+    card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       glow.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(59,130,246,0.06), transparent 40%)`;
     });
-    card.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
-    card.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+    card.addEventListener("mouseenter", () => {
+      glow.style.opacity = "1";
+    });
+    card.addEventListener("mouseleave", () => {
+      glow.style.opacity = "0";
+    });
   });
 </script>
 
 <style>
-  .spotlight-card { position: relative; }
+  .spotlight-card {
+    position: relative;
+  }
 </style>
