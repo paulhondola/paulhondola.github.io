@@ -1,0 +1,84 @@
+---
+---
+<section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-[#0a0f1c] to-[#09090B]">
+
+  <!-- Diagonal image ribbon -->
+  <div class="absolute top-[-17%] right-[-50%] md:right-[4%] w-[300px] md:w-[400px] h-[150%] -rotate-[20deg] flex gap-4 opacity-40 md:opacity-60 z-0 pointer-events-none">
+    <div class="flex flex-col gap-4 w-1/2 pt-12 animate-marquee-slow">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div class="w-full h-48 md:h-64 bg-slate-800/80 rounded-lg border border-slate-700/50 flex items-center justify-center text-slate-600 text-xs font-mono">
+          img {i + 1}
+        </div>
+      ))}
+    </div>
+    <div class="flex flex-col gap-4 w-1/2 -mt-16 animate-marquee-slow-reverse">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div class="w-full h-48 md:h-64 bg-slate-800/80 rounded-lg border border-slate-700/50 flex items-center justify-center text-slate-600 text-xs font-mono">
+          img {i + 1}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="relative z-10 max-w-7xl mx-auto w-full px-6 pt-24 pb-12 md:pt-32 lg:py-0">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+
+      <!-- Left: text (staggered via @theme animation tokens) -->
+      <div class="flex flex-col items-start text-left gap-4 w-full lg:w-[55%] z-20 md:pl-12 lg:pl-20">
+        <p class="animate-fade-in-left-1 text-zinc-300 font-bold tracking-widest uppercase text-sm md:text-base">
+          Hi, My Name Is
+        </p>
+
+        <div class="animate-fade-in-left-2 flex flex-col items-start gap-1 md:gap-2">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">
+            [Paul&nbsp;Hondola]
+          </h1>
+          <h2 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#409cff]">
+            I am a Software<br />Engineer
+          </h2>
+        </div>
+
+        <div class="animate-fade-in-left-3 mt-2 md:mt-4 max-w-xl">
+          <p class="text-zinc-100 font-semibold text-lg lg:text-xl mb-1 md:mb-2">
+            Building systems from the <span class="text-[#409cff]">metal up to the cloud</span>!
+          </p>
+          <p class="text-zinc-400 text-base lg:text-lg leading-relaxed">
+            Computer Engineering student at Politehnica University of Timișoara, spanning full-stack web, systems programming, high-performance computing, and malware analysis.
+          </p>
+        </div>
+
+        <div class="animate-fade-in-left-4 mt-4 md:mt-6">
+          <a
+            href="#work"
+            class="inline-flex items-center justify-center gap-2 bg-[#409cff] hover:bg-[#5aa7fa] text-white px-8 py-3.5 rounded-md font-bold text-lg transition-all duration-300 shadow-[0_0_20px_rgba(0,180,216,0.4)] hover:shadow-[0_0_30px_rgba(0,180,216,0.6)] hover:-translate-y-1"
+          >
+            View My Work
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: floating placeholder cards -->
+      <div class="animate-fade-in-hero w-full lg:w-[45%] flex justify-center lg:justify-end relative h-[400px] sm:h-[450px] lg:h-[600px]">
+        <!-- Background decorative card -->
+        <div class="absolute top-[5%] md:top-[10%] left-1/2 md:left-auto md:right-[20%] ml-[-140px] sm:ml-[-160px] md:ml-0 z-0">
+          <div class="animate-bob-down w-56 h-72 sm:w-64 sm:h-80 bg-slate-800/40 backdrop-blur-md border border-slate-700/50 rounded-xl shadow-2xl">
+            <div class="p-4 flex flex-col gap-3">
+              <div class="w-1/2 h-3 sm:h-4 bg-slate-700/50 rounded"></div>
+              <div class="w-full h-16 sm:h-24 bg-slate-700/30 rounded"></div>
+              <div class="w-3/4 h-3 sm:h-4 bg-slate-700/50 rounded"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Foreground profile card -->
+        <div class="absolute top-[15%] md:top-[25%] left-1/2 md:left-auto md:right-[-5%] ml-[-90px] md:ml-0 z-10">
+          <div class="animate-bob-up w-64 h-80 sm:w-72 sm:h-[22rem] md:w-80 md:h-[22rem] bg-[#0A0A0B] border-2 border-slate-700/60 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden flex items-center justify-center">
+            <span class="text-slate-600 text-sm font-mono">[ profile photo ]</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

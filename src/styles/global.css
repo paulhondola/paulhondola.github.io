@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+
+  /* Animation tokens — usable as animate-* classes */
+  --animate-float: float 20s ease-in-out infinite;
+  --animate-marquee-slow: marquee-down 30s linear infinite;
+  --animate-marquee-slow-reverse: marquee-up 25s linear infinite;
+  --animate-fade-in-left-1: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1) both 0.30s;
+  --animate-fade-in-left-2: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1) both 0.45s;
+  --animate-fade-in-left-3: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1) both 0.60s;
+  --animate-fade-in-left-4: fade-in-left 0.7s cubic-bezier(0.25, 0.4, 0.25, 1) both 0.75s;
+  --animate-fade-in-hero: fade-in 1.0s ease both 0.50s;
+  --animate-bob-down: bob-down 6s ease-in-out infinite;
+  --animate-bob-up: bob-up 5s ease-in-out infinite 1s;
+
+  /* Keyframes */
+  --keyframes-float: {
+
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+      transform: translate(30px, -40px) scale(1.05);
+    }
+
+    50% {
+      transform: translate(-20px, 20px) scale(0.95);
+    }
+
+    75% {
+      transform: translate(15px, 35px) scale(1.02);
+    }
+  }
+
+  ;
+
+  --keyframes-marquee-down: {
+    0% {
+      transform: translateY(0);
+    }
+
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  ;
+
+  --keyframes-marquee-up: {
+    0% {
+      transform: translateY(-50%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  ;
+
+  --keyframes-fade-in-left: {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  ;
+
+  --keyframes-fade-in: {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  ;
+
+  --keyframes-bob-down: {
+
+    0%,
+    100% {
+      transform: translateY(-10px);
+    }
+
+    50% {
+      transform: translateY(10px);
+    }
+  }
+
+  ;
+
+  --keyframes-bob-up: {
+
+    0%,
+    100% {
+      transform: translateY(10px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  ;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-zinc-950 text-zinc-400 font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-zinc-50 font-semibold tracking-tight;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #09090b;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+  }
+}
+
+/* ─── Reusable utilities ─── */
+
+@utility glass-panel {
+  @apply bg-zinc-900/40 backdrop-blur-2xl border border-zinc-800/60;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 4px 40px rgba(0, 0, 0, 0.4);
+}
+
+@utility text-gradient {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #a78bfa 100%);
+}
+
+@utility hover-lift {
+  @apply transition-all duration-500 ease-out;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(59, 130, 246, 0.06);
+  }
+}
+
+@utility section-heading {
+  @apply relative inline-block;
+
+  &::after {
+    content: '';
+    @apply absolute -bottom-3 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full;
+    width: 3rem;
+  }
+}
+
+@utility dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@utility gradient-orb {
+  @apply absolute rounded-full pointer-events-none;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: var(--animate-float);
+}
+
+/* ─── Scroll reveal (IntersectionObserver adds .visible) ─── */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+
+  &[data-reveal="left"] {
+    transform: translateX(-20px);
+  }
+
+  &.visible {
+    opacity: 1;
+    transform: none;
+  }
+}

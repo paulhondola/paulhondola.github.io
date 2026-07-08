@@ -1,8 +1,20 @@
 ---
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero.astro";
+import Experience from "../components/Experience.astro";
+import Projects from "../components/Projects.astro";
+import Skills from "../components/Skills.astro";
+import Contact from "../components/Contact.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <Navbar client:load />
+  <Hero />
+  <div class="flex justify-center w-full">
+    <Experience />
+  </div>
+  <Projects />
+  <Skills />
+  <Contact />
 </Layout>
