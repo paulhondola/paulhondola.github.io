@@ -19,13 +19,7 @@ export const categories: SkillCategory[] = [
     icon: "globe",
     color: "text-emerald-400",
     border: "group-hover:border-emerald-500/30",
-    skills: [
-      "FastAPI",
-      "React",
-      "NestJS",
-      "Hono",
-      "ASP.NET Core",
-    ],
+    skills: ["FastAPI", "React", "NestJS", "Hono", "ASP.NET Core"],
   },
   {
     title: "High Performance Computing",
