@@ -1,5 +1,21 @@
 ---
+const col1 = [
+  "/projects/vibecodium_repo.png",
+  "/projects/smart-shopping-assistant.png",
+  "/projects/archlens.png",
+  "/projects/atomc_compiler.png",
+  "/projects/image_processing_bench.png",
+  "/projects/dmm_bench.png",
+];
 
+const col2 = [
+  "/projects/vibecodium_editor.png",
+  "/projects/java_analyzer.png",
+  "/projects/image_processing.png",
+  "/projects/dmm.png",
+  "/projects/vibecodium_repo.png",
+  "/projects/smart-shopping-assistant.png",
+];
 ---
 
 <section
@@ -9,21 +25,32 @@
   <!-- Diagonal image ribbon -->
   <div
     class="absolute top-[-17%] right-[-50%] md:right-[4%] w-[300px] md:w-[400px] h-[150%] -rotate-[20deg] flex gap-4 opacity-40 md:opacity-60 z-0 pointer-events-none"
+    style="mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);"
   >
     <div class="flex flex-col gap-4 w-1/2 pt-12 animate-marquee-slow">
       {
-        Array.from({ length: 6 }).map((_, i) => (
-          <div class="w-full h-48 md:h-64 bg-slate-800/80 rounded-lg border border-slate-700/50 flex items-center justify-center text-slate-600 text-xs font-mono">
-            img {i + 1}
+        [...col1, ...col1].map((src) => (
+          <div class="w-full h-48 md:h-64 bg-zinc-900/40 rounded-xl border border-zinc-800/40 overflow-hidden shadow-lg shadow-black/20 shrink-0">
+            <img
+              src={src}
+              alt="Project thumbnail"
+              class="w-full h-full object-cover object-top"
+              loading="lazy"
+            />
           </div>
         ))
       }
     </div>
     <div class="flex flex-col gap-4 w-1/2 -mt-16 animate-marquee-slow-reverse">
       {
-        Array.from({ length: 6 }).map((_, i) => (
-          <div class="w-full h-48 md:h-64 bg-slate-800/80 rounded-lg border border-slate-700/50 flex items-center justify-center text-slate-600 text-xs font-mono">
-            img {i + 1}
+        [...col2, ...col2].map((src) => (
+          <div class="w-full h-48 md:h-64 bg-zinc-900/40 rounded-xl border border-zinc-800/40 overflow-hidden shadow-lg shadow-black/20 shrink-0">
+            <img
+              src={src}
+              alt="Project thumbnail"
+              class="w-full h-full object-cover object-top"
+              loading="lazy"
+            />
           </div>
         ))
       }
@@ -114,7 +141,7 @@
             class="animate-bob-up w-64 h-80 sm:w-72 sm:h-[22rem] md:w-80 md:h-[22rem] border-2 border-slate-700/60 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden"
           >
             <img
-              src="/paul.png"
+              src="/photo/paul.png"
               alt="Paul Hondola"
               class="w-full h-full object-cover object-top"
             />

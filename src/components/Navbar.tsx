@@ -21,11 +21,10 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-zinc-950/80 backdrop-blur-2xl border-b border-zinc-800/60 shadow-lg shadow-black/20"
-            : "bg-transparent border-b border-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+          ? "bg-zinc-950/80 backdrop-blur-2xl border-b border-zinc-800/60 shadow-lg shadow-black/20"
+          : "bg-transparent border-b border-transparent"
+          }`}
       >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="#" className="relative group">
@@ -46,7 +45,7 @@ const Navbar = () => {
               </a>
             ))}
             <a
-              href="/Paul_Hondola_CV.pdf"
+              href="/cv/Paul_Hondola_CV.pdf"
               download
               className="ml-4 px-4 py-2 text-sm font-medium text-zinc-100 bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700/50 hover:border-zinc-600 rounded-lg transition-all duration-300"
             >
@@ -70,11 +69,10 @@ const Navbar = () => {
 
       {/* Mobile menu — CSS transition, no framer-motion */}
       <div
-        className={`fixed top-16 left-0 right-0 z-40 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/60 p-6 md:hidden transition-all duration-200 ${
-          mobileOpen
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-2 pointer-events-none"
-        }`}
+        className={`fixed top-16 left-0 right-0 z-40 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/60 p-6 md:hidden transition-all duration-200 ${mobileOpen
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-2 pointer-events-none"
+          }`}
       >
         <div className="flex flex-col gap-1">
           {navLinks.map((link) => (
@@ -88,7 +86,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="/Paul_Hondola_CV.pdf"
+            href="/cv/Paul_Hondola_CV.pdf"
             download
             className="mt-2 px-4 py-3 text-center text-zinc-100 bg-zinc-800/80 border border-zinc-700/50 rounded-xl"
           >

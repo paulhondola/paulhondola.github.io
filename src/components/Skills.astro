@@ -1,75 +1,15 @@
 ---
 import { Code2, Cpu, Terminal, Globe, Database, BarChart3 } from "lucide-react";
+import { categories } from "../data/skills";
 
-const categories = [
-  {
-    title: "Languages",
-    Icon: Code2,
-    color: "text-blue-400",
-    border: "group-hover:border-blue-500/30",
-    skills: ["C/C++", "C#", "Python", "Java", "TypeScript", "SQL", "Bash"],
-  },
-  {
-    title: "High Performance Computing",
-    Icon: Cpu,
-    color: "text-indigo-400",
-    border: "group-hover:border-indigo-500/30",
-    skills: [
-      "MPI",
-      "OpenMP",
-      "POSIX Threads",
-      "SIMD",
-      "Shared Memory",
-      "Distributed Systems",
-    ],
-  },
-  {
-    title: "Systems & Tools",
-    Icon: Terminal,
-    color: "text-violet-400",
-    border: "group-hover:border-violet-500/30",
-    skills: [
-      "Linux",
-      "Docker",
-      "Jenkins",
-      "Git",
-      "Meson",
-      "CMake",
-      "Postman",
-      "IDA Pro",
-      "jadx",
-      "Wireshark",
-    ],
-  },
-  {
-    title: "Web Development",
-    Icon: Globe,
-    color: "text-emerald-400",
-    border: "group-hover:border-emerald-500/30",
-    skills: [
-      "React",
-      "Angular",
-      "NestJS",
-      "ASP.NET Core",
-      "Hono",
-      "TypeScript",
-    ],
-  },
-  {
-    title: "Databases",
-    Icon: Database,
-    color: "text-amber-400",
-    border: "group-hover:border-amber-500/30",
-    skills: ["PostgreSQL", "Supabase", "Entity Framework Core"],
-  },
-  {
-    title: "Data Analysis",
-    Icon: BarChart3,
-    color: "text-rose-400",
-    border: "group-hover:border-rose-500/30",
-    skills: ["NumPy", "Pandas", "Matplotlib", "PyTorch", "Power BI"],
-  },
-];
+const iconMap = {
+  code: Code2,
+  cpu: Cpu,
+  terminal: Terminal,
+  globe: Globe,
+  database: Database,
+  "bar-chart": BarChart3,
+};
 ---
 
 <section id="skills" class="py-28 px-6 relative">
@@ -92,34 +32,37 @@ const categories = [
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {
-        categories.map(({ title, Icon, color, border, skills }, idx) => (
-          <div
-            data-reveal
-            style={`transition-delay: ${idx * 0.1}s`}
-            class={`glass-panel rounded-2xl p-6 group hover-lift ${border} transition-colors duration-500`}
-          >
-            <div class="flex items-center gap-3 mb-5">
-              <div
-                class={`p-2 rounded-xl bg-zinc-950/50 border border-zinc-800/50 ${color}`}
-              >
-                <Icon className="w-5 h-5" />
+        categories.map(({ title, icon, color, border, skills }, idx) => {
+          const Icon = iconMap[icon];
+          return (
+            <div
+              data-reveal
+              style={`transition-delay: ${idx * 0.1}s`}
+              class={`glass-panel rounded-2xl p-6 group hover-lift ${border} transition-colors duration-500`}
+            >
+              <div class="flex items-center gap-3 mb-5">
+                <div
+                  class={`p-2 rounded-xl bg-zinc-950/50 border border-zinc-800/50 ${color}`}
+                >
+                  <Icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 class="font-semibold text-zinc-100 text-sm">{title}</h3>
+                  <span class="text-xs text-zinc-600">
+                    {skills.length} skills
+                  </span>
+                </div>
               </div>
-              <div>
-                <h3 class="font-semibold text-zinc-100 text-sm">{title}</h3>
-                <span class="text-xs text-zinc-600">
-                  {skills.length} skills
-                </span>
+              <div class="flex flex-wrap gap-1.5">
+                {skills.map((skill) => (
+                  <span class="text-xs font-medium text-zinc-500 bg-zinc-950/60 px-2.5 py-1.5 rounded-lg border border-zinc-800/40 hover:text-zinc-200 hover:border-zinc-700/60 transition-all duration-300 cursor-default">
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
-            <div class="flex flex-wrap gap-1.5">
-              {skills.map((skill) => (
-                <span class="text-xs font-medium text-zinc-500 bg-zinc-950/60 px-2.5 py-1.5 rounded-lg border border-zinc-800/40 hover:text-zinc-200 hover:border-zinc-700/60 transition-all duration-300 cursor-default">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))
+          );
+        })
       }
     </div>
   </div>

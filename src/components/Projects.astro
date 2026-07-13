@@ -1,63 +1,11 @@
 ---
-const projects = [
-  {
-    title: "Vibecodium",
-    badge: "1st Place — iTEC 2026 Web Dev",
-    description:
-      "Collaborative browser-based IDE with real-time multi-user editing (Yjs CRDT), an AI coding assistant via SSE streaming, sandboxed Docker execution, GitHub integration, and one-click Vercel deploys.",
-    tech: ["React", "Hono", "Bun", "Supabase", "Docker", "Vercel"],
-    github: "https://github.com/paulhondola/vibecodium",
-    live: "",
-  },
-  {
-    title: "Smart Shopping Assistant",
-    badge: "Full-Stack · LigaAC Labs × NetRom",
-    description:
-      "Full-stack e-commerce platform with an AI-powered agentic cart analyzer. Sequential two-agent LLM pipeline detecting promotions and composing personalized recommendations. Layered ASP.NET Core backend over PostgreSQL with JWT RBAC.",
-    tech: ["React 19", "TypeScript", "ASP.NET Core", "PostgreSQL", "OpenAI"],
-    github: "https://github.com/paulhondola/Smart-Shopping-Assistant",
-    live: "",
-  },
-  {
-    title: "ArchLens Analyzer",
-    badge: "CLI Tool · Reverse Engineering",
-    description:
-      "Polyglot CLI tool (Python orchestrator + Java/C# backends) that reverse-engineers compiled binaries (.jar, .dll) into UML class diagrams via runtime reflection. Outputs PlantUML and yUML across a Maven and .NET monorepo.",
-    tech: ["Python", "Java", "C#"],
-    github: "https://github.com/paulhondola/archlens",
-    live: "",
-  },
-  {
-    title: "AtomC Compiler",
-    badge: "Compiler Design",
-    description:
-      "Recursive-descent compiler frontend for a C-like language written from scratch in C. Implements lexical analysis, tokenization, a semantic analyzer, a stack-based VM, and code generator. Full CI pipeline with integration test suites.",
-    tech: ["C", "Meson"],
-    github: "https://github.com/paulhondola/atomc-compiler",
-    live: "",
-  },
-  {
-    title: "Distributed Image Processing System",
-    badge: "High Performance Computing",
-    description:
-      "Hybrid parallel image processing engine using MPI for distributed memory and OpenMP for shared memory. Architectures include multithreaded, message passing, shared filesystem, producer-consumer task pool, and full hybrid parallelism. Python benchmarking suite with scaling analysis.",
-    tech: ["C", "MPI", "OpenMP", "Python", "Assembly"],
-    github: "https://github.com/paulhondola/MPI-OpenMP-Image-Processing",
-    live: "",
-  },
-  {
-    title: "Parallel DMM Benchmark",
-    badge: "High Performance Computing",
-    description:
-      "Benchmarking suite for dense matrix multiplication implementing serial and parallel algorithms with OpenMP. Covers loop permutations, cache blocking (tiling), and SIMD vectorization validated by inspecting generated assembly across compiler optimization levels.",
-    tech: ["C", "OpenMP", "Python", "Assembly"],
-    github: "https://github.com/paulhondola/OpenMP-Dense-Matrix-Multiplication",
-    live: "",
-  },
-];
+import { projects } from "../data/projects";
+import {
+  githubIcon as githubSvg,
+  externalIcon as externalSvg,
+} from "../data/icons";
 
-const githubSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.18-.35 6.5-1.56 6.5-7.14a5.8 5.8 0 0 0-1.5-3.8 5.36 5.36 0 0 0-.15-3.7s-1.2-.38-3.9 1.4a13.38 13.38 0 0 0-7 0C6.2 1.5 5 1.88 5 1.88a5.36 5.36 0 0 0-.15 3.7 5.8 5.8 0 0 0-1.5 3.8c0 5.58 3.32 6.79 6.5 7.14a4.8 4.8 0 0 0-1 3.02V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>`;
-const externalSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>`;
+const activeProjects = projects.filter((project) => !project.disabled);
 ---
 
 <section id="work" class="py-28 px-6 relative">
@@ -75,7 +23,7 @@ const externalSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
 
     <div class="grid md:grid-cols-2 gap-6">
       {
-        projects.map((project, index) => (
+        activeProjects.map((project, index) => (
           <div
             data-reveal
             style={`transition-delay: ${index * 0.07}s`}
@@ -87,11 +35,26 @@ const externalSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
               aria-hidden="true"
             />
 
-            {/* Image placeholder */}
-            <div class="relative w-full aspect-video overflow-hidden bg-zinc-900 border-b border-zinc-800/50 shrink-0 flex items-center justify-center z-10">
-              <span class="text-zinc-700 text-sm font-mono">
-                [16:9 preview]
-              </span>
+            {/* Project Image Preview */}
+            <div class="relative w-full aspect-video overflow-hidden bg-zinc-950 border-b border-zinc-800/50 shrink-0 z-10">
+              {project.image && (
+                <>
+                  <img
+                    src={project.image.main}
+                    alt={`${project.title} screenshot`}
+                    loading="lazy"
+                    class="w-full h-full object-cover object-top transition-all duration-700 ease-out group-hover:scale-105"
+                  />
+                  {project.image.hover && (
+                    <img
+                      src={project.image.hover}
+                      alt={`${project.title} secondary screenshot`}
+                      loading="lazy"
+                      class="absolute inset-0 w-full h-full object-cover object-top opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out group-hover:scale-105"
+                    />
+                  )}
+                </>
+              )}
             </div>
 
             {/* Content */}
