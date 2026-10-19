@@ -25,9 +25,15 @@ check(
   ),
 );
 check("twitter card", html.includes('content="summary_large_image"'));
+// Fonts are self-hosted by Astro: no render-blocking Google stylesheet.
+check("fonts self-hosted", !html.includes("fonts.googleapis.com"));
 check(
-  "fonts",
-  html.includes("Space+Grotesk") && html.includes("JetBrains+Mono"),
+  "fonts preloaded",
+  /<link rel="preload" href="[^"]+" as="font"/.test(html),
+);
+check(
+  "font families",
+  html.includes("Space Grotesk") && html.includes("JetBrains Mono"),
 );
 check("signal token", css.includes("#5cf2a6"));
 // `text-base` is a Tailwind font-size class; a `base` colour token hijacks it.

@@ -1,5 +1,5 @@
 ---
-import { getImage } from "astro:assets";
+import { Font, getImage } from "astro:assets";
 import paul from "../assets/paul.png";
 import "../styles/global.css";
 
@@ -31,12 +31,8 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).href;
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <Font cssVariable="--font-space-grotesk" preload={[{ subset: "latin" }]} />
+    <Font cssVariable="--font-jetbrains-mono" preload={[{ subset: "latin" }]} />
     <title>{title}</title>
   </head>
   <body>
