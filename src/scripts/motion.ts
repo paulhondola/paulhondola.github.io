@@ -74,18 +74,17 @@ export function initMotion(): void {
     }),
   );
 
-  document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
-    const counter = { value: Number(el.dataset.count) };
-    gsap.from(counter, {
-      value: 0,
+  // Tweening textContent itself renders 0 as soon as the trigger is armed,
+  // so the number never shows its final value and then snaps back to 0.
+  document.querySelectorAll("[data-count]").forEach((el) =>
+    gsap.from(el, {
+      textContent: 0,
+      snap: { textContent: 1 },
       duration: 1.2,
       ease: "power2.out",
-      onUpdate: () => {
-        el.textContent = String(Math.round(counter.value));
-      },
       scrollTrigger: { trigger: el, start: "top 90%", once: true },
-    });
-  });
+    }),
+  );
 
   // Fonts and images change layout; re-measure trigger positions after both.
   document.fonts.ready.then(() => ScrollTrigger.refresh());

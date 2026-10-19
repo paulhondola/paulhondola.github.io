@@ -133,6 +133,18 @@ check(
 );
 check("photo optimized", !html.includes('src="/photo/paul.png"'));
 
+// Final review fixes
+check(
+  "own favicon",
+  readFileSync("dist/favicon.svg", "utf8").includes("#5cf2a6") &&
+    !html.includes("favicon.ico"),
+);
+check("vibecodium claim backed", !text.includes("Every run gets its own"));
+check(
+  "numbers as the CV states them",
+  html.includes("&gt;16 GB → 5.05 GB") && !/[^~]18×/.test(text),
+);
+
 if (fails.length) {
   console.error("FAIL:\n  " + fails.join("\n  "));
   process.exit(1);

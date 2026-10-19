@@ -148,7 +148,7 @@ export const projects: Project[] = [
     measured:
       "User code runs in a Docker sandbox for 4 languages with a 2 GB memory cap, no network access and a 3 s timeout.",
     decided:
-      "Every run gets its own capped, offline container. The project took 1st place at iTEC 2026.",
+      "User code runs sandboxed, capped and offline. The project took 1st place at iTEC 2026.",
     tech: ["TypeScript", "React", "Bun", "Supabase", "Yjs", "Docker"],
     links: [
       { label: "github", href: "https://github.com/paulhondola/vibecodium" },

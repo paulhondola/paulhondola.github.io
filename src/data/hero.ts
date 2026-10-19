@@ -18,8 +18,8 @@ export const changes = [
 ];
 
 export const readouts = [
-  { value: "18×", label: "Nokia pipeline" },
-  { value: "16 GB → 5.05 GB", label: "Groundly peak memory" },
+  { value: "~18×", label: "Nokia pipeline" },
+  { value: ">16 GB → 5.05 GB", label: "Groundly peak memory" },
   { value: "679 GFLOPS", label: "gemm-bench, 87% of NEON peak" },
   { value: "194", label: "EchoCare backend tests" },
 ];
