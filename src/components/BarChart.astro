@@ -1,0 +1,40 @@
+---
+import type { Bar } from "../data/projects";
+
+interface Props {
+  caption: string;
+  bars: Bar[];
+}
+const { caption, bars } = Astro.props;
+const max = Math.max(...bars.map((b) => b.value));
+---
+
+<figure class="w-full font-mono text-xs">
+  <figcaption class="text-muted uppercase tracking-widest text-[10px] mb-5">
+    {caption}
+  </figcaption>
+  <ul class="flex flex-col gap-4">
+    {
+      bars.map((b) => (
+        <li>
+          <div class="flex justify-between mb-1.5">
+            <span class="text-body">{b.label}</span>
+            <span class={b.highlight ? "text-signal" : "text-text"}>
+              {b.display}
+            </span>
+          </div>
+          <div class="h-2 bg-canvas rounded-sm">
+            <div
+              data-grow
+              class:list={[
+                "h-full rounded-sm origin-left",
+                b.highlight ? "bg-signal" : "bg-muted",
+              ]}
+              style={`width: ${(b.value / max) * 100}%`}
+            />
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</figure>

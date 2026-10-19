@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import BarChart from "./BarChart.astro";
+import DeliveryPath from "./DeliveryPath.astro";
+import type { Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+  index: number;
+}
+const { project: p, index } = Astro.props;
+const trace = [
+  ["problem", p.problem],
+  ["tried", p.tried],
+  ["measured", p.measured],
+  ["decided", p.decided],
+];
+---
+
+<article
+  data-project
+  class="grid lg:grid-cols-[2fr_3fr] bg-surface border border-line rounded-lg overflow-hidden"
+>
+  <div
+    class="border-b lg:border-b-0 lg:border-r border-line p-6 flex items-center bg-canvas/40"
+  >
+    {
+      p.media.kind === "image" ? (
+        <Image
+          src={p.media.src}
+          alt={p.media.alt}
+          widths={[480, 800]}
+          sizes="(min-width: 1024px) 440px, 100vw"
+          class="w-full h-auto rounded border border-line"
+        />
+      ) : p.media.kind === "bars" ? (
+        <BarChart caption={p.media.caption} bars={p.media.bars} />
+      ) : (
+        <DeliveryPath caption={p.media.caption} steps={p.media.steps} />
+      )
+    }
+  </div>
+
+  <div class="p-6 sm:p-8 flex flex-col gap-4">
+    <div
+      class="flex flex-wrap justify-between gap-x-4 gap-y-1 font-mono text-[11px] text-muted"
+    >
+      <span
+        >{String(index + 1).padStart(2, "0")} · {p.context} · {p.period}</span
+      >
+      <span class="flex gap-4">
+        {
+          p.isPrivate ? (
+            <span>private repo</span>
+          ) : (
+            p.links.map((l) => (
+              <a
+                href={l.href}
+                target="_blank"
+                rel="noopener"
+                class="text-text hover:text-signal transition-colors"
+              >
+                {l.label} ↗
+              </a>
+            ))
+          )
+        }
+      </span>
+    </div>
+
+    <h3 data-split class="text-3xl sm:text-4xl">{p.title}</h3>
+    <p class="font-mono text-sm sm:text-base text-signal">{p.metric}</p>
+
+    <dl
+      class="grid sm:grid-cols-[6rem_1fr] gap-x-4 gap-y-1 sm:gap-y-3 font-mono text-[13px] leading-relaxed"
+    >
+      {
+        trace.map(([label, value]) => (
+          <>
+            <dt class="text-muted">{label}</dt>
+            <dd class="text-body mb-3 sm:mb-0">{value}</dd>
+          </>
+        ))
+      }
+    </dl>
+
+    <ul class="flex flex-wrap gap-1.5 pt-1">
+      {
+        p.tech.map((t) => (
+          <li class="font-mono text-[11px] border border-line rounded px-2 py-0.5 text-body">
+            {t}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>

@@ -13,7 +13,7 @@
 ## Global Constraints
 
 - **Colours** (Tailwind `@theme` tokens):
-  - `--color-base: #07090c`
+  - `--color-canvas: #07090c` (named `canvas`, not `base`, because `text-base` is a Tailwind font-size class)
   - `--color-surface: #0d1116`
   - `--color-line: #1d252c`
   - `--color-text: #e7ecef`

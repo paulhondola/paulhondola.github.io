@@ -30,6 +30,8 @@ check(
   html.includes("Space+Grotesk") && html.includes("JetBrains+Mono"),
 );
 check("signal token", css.includes("#5cf2a6"));
+// `text-base` is a Tailwind font-size class; a `base` colour token hijacks it.
+check("no base colour token", !css.includes("--color-base"));
 check("no-js-hiding", !css.includes("[data-reveal]"));
 check("no inter", !html.includes("family=Inter"));
 check("no gemm-bench shadow", !existsSync("dist/gemm-bench"));
@@ -69,6 +71,37 @@ check(
 );
 check("meta line", text.includes("GPA 9.72/10"));
 check("cta", (html.match(/href="#work"/g) ?? []).length >= 3);
+
+// Task 4: work
+check("five cards", (html.match(/data-project/g) ?? []).length === 5);
+check(
+  "trace labels",
+  ["problem", "tried", "measured", "decided"].every(
+    (w) => (text.match(new RegExp(`\\b${w}\\b`, "g")) ?? []).length >= 5,
+  ),
+);
+check(
+  "echocare private",
+  text.includes("private repo") &&
+    !html.includes("github.com/paulhondola/EchoCare"),
+);
+check(
+  "gemm dashboard",
+  html.includes('href="https://paulhondola.github.io/gemm-bench/"'),
+);
+check(
+  "archive",
+  ["Smart Shopping Assistant", "ArchLens", "AtomC", "DMM"].every((v) =>
+    text.includes(v),
+  ),
+);
+check(
+  "external links",
+  (html.match(/<a [^>]*href="https:\/\/[^"]*"[^>]*>/g) ?? []).every(
+    (a) => a.includes('target="_blank"') && a.includes('rel="noopener"'),
+  ),
+);
+check("optimized images", !html.includes('src="/projects/'));
 
 if (fails.length) {
   console.error("FAIL:\n  " + fails.join("\n  "));

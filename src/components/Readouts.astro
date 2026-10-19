@@ -10,7 +10,7 @@ import { readouts } from "../data/hero";
           <dt class="font-mono text-[11px] uppercase tracking-widest text-muted order-2">
             {r.label}
           </dt>
-          <dd class="font-mono text-xl sm:text-2xl xl:text-3xl text-signal mt-2 whitespace-nowrap">
+          <dd class="font-mono text-xl lg:text-2xl text-signal mt-2 sm:whitespace-nowrap">
             {/^\d+$/.test(r.value) ? (
               <span data-count={r.value}>{r.value}</span>
             ) : (
