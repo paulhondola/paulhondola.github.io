@@ -35,6 +35,17 @@ check("no inter", !html.includes("family=Inter"));
 check("no gemm-bench shadow", !existsSync("dist/gemm-bench"));
 check("no placeholders", !/placeholder|lorem|TODO/i.test(text));
 
+// Task 2: nav
+check(
+  "nav links",
+  ["#work", "#experience", "#stack", "#contact"].every((h) =>
+    html.includes(`href="${h}"`),
+  ),
+);
+check("cv link", html.includes('href="/cv/Paul_Hondola_CV.pdf"'));
+check("availability", text.includes("open to full-time · from Jul 2027"));
+check("no react", !html.includes("astro-island"));
+
 if (fails.length) {
   console.error("FAIL:\n  " + fails.join("\n  "));
   process.exit(1);
