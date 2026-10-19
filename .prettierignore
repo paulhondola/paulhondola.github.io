@@ -2,4 +2,4 @@ dist/
 node_modules/
 .astro/
 docs/
-bun.lock
+package-lock.json

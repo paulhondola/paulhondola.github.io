@@ -1,4 +1,4 @@
-// Asserts on the built page. Run with `bun run test` (builds first).
+// Asserts on the built page. Run with `npm test` (builds first).
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 
 const html = readFileSync("dist/index.html", "utf8");

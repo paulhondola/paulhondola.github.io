@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.18.0"
   },
   "scripts": {
     "dev": "astro dev",
@@ -11,9 +11,10 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
+    "lint": "oxlint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "astro build && bun scripts/check-dist.ts"
+    "test": "astro build && node scripts/check-dist.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -24,6 +25,7 @@
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
+    "oxlint": "^1.88.0",
     "prettier": "^3.9.4",
     "prettier-plugin-astro": "^0.14.1"
   }

@@ -9,19 +9,20 @@ Live at [paulhondola.github.io](https://paulhondola.github.io)
 - **Astro 7** — static site generation, `.astro` components
 - **Tailwind CSS v4** — via `@tailwindcss/vite`, `@theme` tokens, `@utility` blocks
 - **GSAP + Lenis** — scroll reveals, chart drawing, smooth scroll (`src/scripts/motion.ts`); skipped under `prefers-reduced-motion`
-- **Bun** — package manager and runtime
+- **npm** — package manager; **Oxlint** for linting, **Prettier** for formatting
 
 ## Dev
 
 ```sh
-bun install
-bun run dev        # http://localhost:4321
-bun run build      # output → dist/
-bun run preview    # preview dist/ locally
-bun run check      # TypeScript / Astro type check
-bun run format     # prettier --write
-bun run format:check  # prettier --check (runs in CI)
-bun run test       # build, then assert on dist/index.html (scripts/check-dist.ts)
+npm install
+npm run dev        # http://localhost:4321
+npm run build      # output → dist/
+npm run preview    # preview dist/ locally
+npm run check      # TypeScript / Astro type check
+npm run lint       # oxlint (runs in CI)
+npm run format     # prettier --write
+npm run format:check  # prettier --check (runs in CI)
+npm test           # build, then assert on dist/index.html (scripts/check-dist.ts)
 ```
 
 ## Structure
@@ -43,6 +44,6 @@ scripts/check-dist.ts    # built-page assertions
 
 Pushes to `main` auto-deploy via GitHub Actions (`.github/workflows/deploy.yml`):
 
-1. **check** — `astro check` + `prettier --check`
-2. **build** — `bun run build` → uploads `dist/`
+1. **check** — `astro check` + `oxlint` + `prettier --check`
+2. **build** — `npm run build` → uploads `dist/`
 3. **deploy** — publishes to GitHub Pages
