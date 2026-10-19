@@ -1,87 +1,43 @@
 ---
-import { socials } from "../data/contact";
-import {
-  githubIcon as githubSvg,
-  linkedinIcon as linkedinSvg,
-  mailIcon as mailSvg,
-} from "../data/icons";
-
-const svgMap = {
-  github: githubSvg,
-  linkedin: linkedinSvg,
-  mail: mailSvg,
-};
+import { email, socials, cvHref } from "../data/site";
 ---
 
-<section id="contact" class="py-28 px-6 relative overflow-hidden">
-  <div
-    class="gradient-orb w-[500px] h-[500px] bg-blue-600 bottom-[-20%] left-[10%]"
-    style="animation-delay:3s"
+<section id="contact" class="max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-16">
+  <p class="font-mono text-xs text-muted">
+    <span class="text-signal" aria-hidden="true">●</span> /contact
+  </p>
+  <h2
+    data-split
+    class="mt-3 text-4xl sm:text-6xl max-w-4xl leading-[1.02] tracking-[-0.03em]"
   >
-  </div>
-  <div
-    class="gradient-orb w-[400px] h-[400px] bg-indigo-600 bottom-[-10%] right-[5%]"
-    style="animation-delay:10s"
+    Got a slow system or a hard argument? Let's talk.
+  </h2>
+  <a
+    href={`mailto:${email}`}
+    class="inline-block mt-10 font-mono text-xl sm:text-3xl text-text underline decoration-line underline-offset-8 hover:decoration-text transition-colors break-all"
+    >{email}</a
   >
-  </div>
-
-  <div class="relative z-10 max-w-6xl mx-auto">
-    <div data-reveal>
-      <p
-        class="text-blue-400 text-sm font-medium tracking-wider uppercase mb-3"
-      >
-        Contact
-      </p>
-      <h2
-        class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight section-heading"
-      >
-        Let's build something<br />
-        <span class="text-gradient">extraordinary.</span>
-      </h2>
-      <p class="text-zinc-400 text-lg mb-10 max-w-xl leading-relaxed">
-        I'm always open to new opportunities. Whether you have a question or
-        just want to say hi, I'll try my best to get back to you.
-      </p>
-
-      <div class="flex justify-start gap-4">
-        {
-          socials.map(({ icon, href, label, hoverClass }) => (
+  <ul class="mt-10 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm">
+    {
+      socials
+        .filter((s) => s.label !== "Email")
+        .map((s) => (
+          <li>
             <a
-              href={href}
-              target={href.startsWith("mailto") ? undefined : "_blank"}
-              rel="noreferrer"
-              aria-label={label}
-              class={`p-3 rounded-xl bg-zinc-900/60 border border-zinc-800/50 text-zinc-500 transition-all duration-300 hover:bg-zinc-800/60 w-11 h-11 ${hoverClass}`}
-              set:html={svgMap[icon]}
-            />
-          ))
-        }
-      </div>
-    </div>
-  </div>
-
-  <footer class="relative z-10 mt-28 pt-8 border-t border-zinc-800/40">
-    <div
-      class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4"
-    >
-      <p class="text-zinc-600 text-sm">
-        © {new Date().getFullYear()} Paul Hondola
-      </p>
-    </div>
-  </footer>
+              href={s.href}
+              target="_blank"
+              rel="noopener"
+              class="text-body hover:text-text transition-colors"
+            >
+              {s.label} ↗
+            </a>
+          </li>
+        ))
+    }
+    <li>
+      <a href={cvHref} class="text-body hover:text-text transition-colors"
+        >CV ↓</a
+      >
+    </li>
+  </ul>
 </section>
-
-<style>
-  .cta-btn svg {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-  .cta-btn .arrow-icon {
-    width: 1rem;
-    height: 1rem;
-    transition: transform 0.3s;
-  }
-  .cta-btn:hover .arrow-icon {
-    transform: translateX(4px);
-  }
-</style>

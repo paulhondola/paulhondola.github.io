@@ -1,70 +1,68 @@
-export interface SkillCategory {
+export interface SkillGroup {
   title: string;
-  icon: "code" | "cpu" | "terminal" | "globe" | "database" | "bar-chart";
-  color: string;
-  border: string;
-  skills: string[];
+  items: string[];
 }
 
-export const categories: SkillCategory[] = [
+// Verbatim from the CV's Technical Skills section.
+export const skillGroups: SkillGroup[] = [
   {
     title: "Languages",
-    icon: "code",
-    color: "text-blue-400",
-    border: "group-hover:border-blue-500/30",
-    skills: ["Python", "TypeScript", "Java", "C/C++", "C#", "SQL", "Bash"],
+    items: ["Python", "C", "C++", "Rust", "Java", "TypeScript", "SQL", "Bash"],
   },
   {
-    title: "Web Development",
-    icon: "globe",
-    color: "text-emerald-400",
-    border: "group-hover:border-emerald-500/30",
-    skills: ["FastAPI", "React", "NestJS", "Hono", "ASP.NET Core"],
-  },
-  {
-    title: "High Performance Computing",
-    icon: "cpu",
-    color: "text-indigo-400",
-    border: "group-hover:border-indigo-500/30",
-    skills: [
+    title: "Parallel & HPC",
+    items: [
       "MPI",
       "OpenMP",
+      "Rayon",
       "POSIX Threads",
-      "SIMD",
-      "Shared Memory",
-      "Distributed Systems",
+      "SIMD/NEON",
+      "Cache Optimization",
     ],
   },
   {
     title: "Systems & Tools",
-    icon: "terminal",
-    color: "text-violet-400",
-    border: "group-hover:border-violet-500/30",
-    skills: [
+    items: [
       "Linux",
       "Docker",
       "Jenkins",
-      "Git",
+      "GitHub Actions",
+      "GitLab CI",
+      "Railway",
       "Meson",
-      "CMake",
-      "Postman",
+      "Cargo",
+      "Maven",
       "IDA Pro",
-      "jadx",
-      "Wireshark",
+      "Frida",
     ],
   },
   {
-    title: "Data Analysis",
-    icon: "bar-chart",
-    color: "text-rose-400",
-    border: "group-hover:border-rose-500/30",
-    skills: ["NumPy", "Pandas", "Matplotlib", "PyTorch", "Power BI"],
+    title: "Data",
+    items: [
+      "pandas",
+      "NumPy",
+      "DuckDB",
+      "Parquet",
+      "Power BI",
+      "PostgreSQL",
+      "MariaDB",
+      "SQLite",
+    ],
   },
   {
-    title: "Databases",
-    icon: "database",
-    color: "text-amber-400",
-    border: "group-hover:border-amber-500/30",
-    skills: ["PostgreSQL", "pgvector", "MariaDB"],
+    title: "Web",
+    items: [
+      "React",
+      "Angular",
+      "Svelte",
+      "NestJS",
+      "FastAPI",
+      "Hono",
+      "Supabase",
+    ],
+  },
+  {
+    title: "Spoken",
+    items: ["English (C1)", "Romanian (native)"],
   },
 ];

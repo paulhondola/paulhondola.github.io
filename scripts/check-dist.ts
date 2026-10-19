@@ -103,6 +103,30 @@ check(
 );
 check("optimized images", !html.includes('src="/projects/'));
 
+// Task 5: experience, stack, about, contact
+check(
+  "sections",
+  ["experience", "stack", "about", "contact"].every((id) =>
+    html.includes(`id="${id}"`),
+  ),
+);
+check("nokia", text.includes("~90-file") && text.includes("prod-vs-dev"));
+check("bitdefender", text.includes("Frida"));
+check("skills", text.includes("Rayon") && text.includes("DuckDB"));
+check(
+  "education",
+  (text.includes("Universitatea Politehnica Timișoara") ||
+    text.includes("UPT")) &&
+    text.includes("Jul 2027"),
+);
+check(
+  "links",
+  html.includes('href="mailto:paulhondola@gmail.com"') &&
+    html.includes("linkedin.com/in/paulhondola") &&
+    html.includes('github.com/paulhondola"'),
+);
+check("photo optimized", !html.includes('src="/photo/paul.png"'));
+
 if (fails.length) {
   console.error("FAIL:\n  " + fails.join("\n  "));
   process.exit(1);

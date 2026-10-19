@@ -2,44 +2,39 @@ export interface Experience {
   role: string;
   company: string;
   period: string;
-  description: string[];
-  tech: string[];
+  stack: string[];
+  points: string[];
 }
 
 export const experiences: Experience[] = [
   {
     role: "Software Engineer Intern",
     company: "Nokia",
-    period: "Mar 2026 — Present",
-    description: [
-      "Profiled and optimized data-processing Python scripts, reducing end-to-end runtime by 50% through algorithmic refactoring and NumPy vectorization.",
-      "Contributed to the Mobile Infrastructure Metrics Automation platform, developing ETL scripts and automated test pipelines.",
-      "Enhanced CI/CD pipelines using Jenkins and Docker for scalable metric processing and analysis.",
-      "Maintained and improved interactive Power BI dashboards to surface key metrics and KPIs.",
-      "Contributed reusable modules to the team's shared core library, extending functionality across multiple internal automation projects.",
+    period: "Mar 2026 →",
+    stack: ["Python", "pandas", "MariaDB", "Jenkins", "GitLab", "Power BI"],
+    points: [
+      "Re-architected two financial data pipelines (2 h 15 min + 7 min) into one 8-minute pipeline run every 2 h (~18× faster) by vectorizing row-by-row pandas logic and parallelizing data fetching via v2 API parameters and concurrent exports. A prod-vs-dev diff caught silently dropped legacy entries.",
+      "Restored 3 product-management pipelines broken by an upstream access change with a minimal hotfix (HTML → XML export parsing), then proposed and executed a ~90-file rewrite that removed duplicated logic through a shared module layer and a uniform index/parser/pipeline structure per data source.",
     ],
-    tech: ["Python", "Jenkins", "Docker", "Power BI", "NumPy", "Pandas"],
   },
   {
     role: "Full Stack Developer Intern",
     company: "Hibyte",
-    period: "Jul 2025 — Oct 2025",
-    description: [
-      "Engineered 'GameBox', a full-stack monorepo for game center management, integrating a customer-facing web app with an admin CMS.",
-      "Built a responsive frontend architecture using Angular, TypeScript, and SCSS.",
-      "Developed a backend system using NestJS and Payload CMS, leveraging Supabase for secure authentication and real-time database operations.",
+    period: "Jul – Oct 2025",
+    stack: ["TypeScript", "Angular", "NestJS", "Payload CMS", "Supabase"],
+    points: [
+      "Built the role-based authentication layer (Supabase JWTs validated by NestJS guards across admin, staff and customer roles) and backend routes for a game-center management proof of concept, in a 5-person team.",
+      "Configured 7 Payload CMS collections for non-technical admins and maintained Supabase migrations through continuous schema changes.",
     ],
-    tech: ["TypeScript", "Angular", "NestJS", "Payload CMS", "Supabase"],
   },
   {
-    role: "Malware Analyst Trainee",
-    company: "Bitdefender",
-    period: "Apr 2025 — Jun 2025",
-    description: [
-      "Conducted static and dynamic analysis of Windows and Android malware samples to identify C&C protocols and persistence mechanisms.",
-      "Reverse engineered ransomware encryption routines using IDA Pro (x86 disassembly) and jadx (Java decompilation).",
-      "Investigated Android system vulnerabilities and exploitation techniques, analyzing APK structures and security models in sandboxed environments.",
+    role: "Reverse Engineering & Malware Analysis Trainee",
+    company: "Bitdefender × LigaAC",
+    period: "Apr – Jun 2025",
+    stack: ["C", "Python", "x86 Assembly", "IDA Pro", "Frida"],
+    points: [
+      "Reversed a file-encryption routine from x86 disassembly in IDA Pro and wrote working decryptors in C for 5 file formats, plus a keygen reproducing a licence algorithm from recovered lookup tables and hash logic.",
+      "Unpacked dynamically loaded Android DEX payloads with Frida hooks on DexClassLoader/DexFile, and built Python/Java tools to decrypt locker-app data across 8 reverse-engineering labs.",
     ],
-    tech: ["Java", "Python", "C", "x86 Assembly", "IDA Pro", "jadx"],
   },
 ];
