@@ -1,0 +1,24 @@
+---
+import { readouts } from "../data/hero";
+---
+
+<section aria-label="Key numbers" class="border-y border-line">
+  <dl class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-4">
+    {
+      readouts.map((r) => (
+        <div class="py-6 pr-4 border-line [&:not(:last-child)]:lg:border-r lg:pl-6 lg:first:pl-0">
+          <dt class="font-mono text-[11px] uppercase tracking-widest text-muted order-2">
+            {r.label}
+          </dt>
+          <dd class="font-mono text-xl sm:text-2xl xl:text-3xl text-signal mt-2 whitespace-nowrap">
+            {/^\d+$/.test(r.value) ? (
+              <span data-count={r.value}>{r.value}</span>
+            ) : (
+              r.value
+            )}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
