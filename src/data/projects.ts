@@ -292,7 +292,7 @@ export const projects: Project[] = [
     what: "An Apple Silicon-first, hand-tuned GEMM benchmark across CPU, AMX and GPU",
     proof: [
       {
-        text: "679 GFLOPS f32 · 87% of the M1 Pro's NEON peak",
+        text: "648 GFLOPS f32 · 83% of the M1 Pro's 8 P-core NEON peak",
         measured: true,
       },
     ],
@@ -303,7 +303,7 @@ export const projects: Project[] = [
     measured:
       "5 precisions against Apple AMX and Metal GPU. Results from 8 machines and 4 contributors in strict-schema SQLite, validated in CI on Ubuntu, Windows and macOS (147 Rust tests).",
     decided:
-      "Published every result in a live dashboard: 679 GFLOPS on the CPU, 1.9–2.3 TFLOPS on AMX, 3.5 TFLOPS on the GPU.",
+      "Published every result in a live dashboard: 648 GFLOPS on the 8 P-cores, 1.9–2.3 TFLOPS on AMX, 3.5 TFLOPS on the GPU.",
     tech: [
       "Rust",
       "Rayon",
@@ -331,20 +331,24 @@ export const projects: Project[] = [
           { label: "packed, 1 core", value: 92.8, display: "92.8" },
           {
             label: "rayon-packed, 8 P-cores",
-            value: 679,
-            display: "679",
+            value: 648.1,
+            display: "648",
             highlight: true,
             mark: 777.216,
           },
         ],
-        note: "dashed line = NEON peak · ~1,300× from naive to tuned",
+        note: "dashed line = 8 P-core NEON peak · ~1,200× from naive to tuned",
       },
       {
         kind: "bars",
         caption: "best run per engine · f32",
         domain: [0, 3538],
         bars: [
-          { label: "CPU · my rayon-packed", value: 679, display: "679" },
+          {
+            label: "CPU · my rayon-packed, 8 P-cores",
+            value: 648.1,
+            display: "648",
+          },
           { label: "AMX · Accelerate BLAS", value: 1897, display: "1,897" },
           { label: "AMX · Accelerate BNNS", value: 2318, display: "2,318" },
           {

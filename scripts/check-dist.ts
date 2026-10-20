@@ -78,7 +78,7 @@ check(
     hero.includes(`>${l}<`),
   ) &&
     [
-      "679 GFLOPS",
+      "648 GFLOPS",
       "5 formats",
       "6.8×",
       "~18×",
@@ -181,6 +181,18 @@ check(
   ["1.82×", "3.52×", "6.51×", "91%", "88%", "81%", "8 × 1 thread"].every((v) =>
     work.includes(v),
   ),
+);
+// 679 GFLOPS was a 10-thread run (8 P + 2 E cores) against the 8 P-core
+// peak. The site states the 8 P-core run: 648 GFLOPS, 83% of that peak.
+check(
+  "gemm on 8 P-cores",
+  !text.includes("679") &&
+    !text.includes("87%") &&
+    html.includes(
+      "648 GFLOPS f32 · 83% of the M1 Pro&#39;s 8 P-core NEON peak",
+    ) &&
+    work.includes("width: 95.3%") &&
+    text.includes("~1,200× from naive to tuned"),
 );
 check(
   "retracted numbers gone",

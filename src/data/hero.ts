@@ -23,7 +23,7 @@ export const ladder = [
   {
     layer: "metal",
     what: "Rust GEMM kernels, std::simd",
-    proof: "679 GFLOPS",
+    proof: "648 GFLOPS",
     measured: true,
   },
   {

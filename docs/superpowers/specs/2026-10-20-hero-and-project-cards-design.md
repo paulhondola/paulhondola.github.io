@@ -57,7 +57,7 @@ Two columns on desktop, stacked on mobile. The existing meta line and CTAs stay.
 
 | Layer | What | Proof | Colour |
 |---|---|---|---|
-| metal | Rust GEMM kernels, std::simd | 679 GFLOPS | signal |
+| metal | Rust GEMM kernels, std::simd | 648 GFLOPS | signal |
 | binaries | x86 reversing, decryptors in C | 5 formats | text |
 | parallel | MPI + OpenMP convolution | 6.8× | signal |
 | data | Nokia finance pipelines | ~18× | signal |
@@ -136,11 +136,11 @@ The **image-processing card has no tiles row**: its specs fill the right half in
 
 - **Meta:** `03 · Rust · HPC · Sep – Oct 2026` · github ↗ · live dashboard ↗ (https://paulhondola.github.io/gemm-bench/)
 - **What:** An Apple Silicon-first, hand-tuned GEMM benchmark across CPU, AMX and GPU
-- **Proof (signal):** `679 GFLOPS f32 · 87% of the M1 Pro's NEON peak`
+- **Proof (signal):** `648 GFLOPS f32 · 83% of the M1 Pro's 8 P-core NEON peak` *(Paul's decision, 2026-10-20: the 679 GFLOPS best was a 10-thread run, 8 P + 2 E cores, measured against the 8 P-core peak. 648.1 is the best 8-thread run.)*
 - **Graphs:**
-  1. *my CPU tuning · f32 · log scale:* `naive ijk 0.525` → `packed, 1 core 92.8` → `rayon-packed, 8 P-cores 679` (signal), with a dashed mark at the 8-core NEON peak (777 GFLOPS). Note: "dashed line = NEON peak · ~1,300× from naive to tuned".
+  1. *my CPU tuning · f32 · log scale:* `naive ijk 0.525` → `packed, 1 core 92.8` → `rayon-packed, 8 P-cores 648` (signal), with a dashed mark at the 8-core NEON peak (777 GFLOPS). Note: "dashed line = 8 P-core NEON peak · ~1,200× from naive to tuned".
   2. *best run per engine · f32:* linear bars, max 3,538:
-     - CPU · my rayon-packed 679
+     - CPU · my rayon-packed, 8 P-cores 648
      - AMX · Accelerate BLAS 1,897
      - AMX · Accelerate BNNS 2,318
      - GPU · my Metal simdgroup shader 2,886
@@ -154,7 +154,7 @@ The **image-processing card has no tiles row**: its specs fill the right half in
   - **82%:** of MPS reached by my hand-written Metal simdgroup shader (2,886 GFLOPS f32), 97% at f16 *(Paul confirmed the shader is his)*
   - **+22%:** BNNS's best over BLAS's best on the same AMX coprocessor: 2,318 GFLOPS f32 at N=4096 vs 1,897 at N=1024
   - **4,721:** GFLOPS f16 on AMX through BNNS at N=1024, the fastest f16 result on the M1 Pro
-- **Sources:** `gemm-bench/data/db/paulhondola/m1pro.sqlite` (`max(gops)` per kernel and precision), `data/peaks.csv` (777.216 f32 8-core peak), and the dashboard's optimization ladder (0.525 / 92.8 / 679, all at N=4096). *Not claimed:* "BNNS beats the GPU at f16". At N=4096 MPS wins (3,647 vs 3,184), and at matched N=4096 BNNS leads BLAS by 36%, not 22%.
+- **Sources:** `gemm-bench/data/db/paulhondola/m1pro.sqlite` (`max(gops)` per kernel and precision), `data/peaks.csv` (777.216 f32 8-core peak), and the dashboard's optimization ladder (0.525 / 92.8 at N=4096; 648.1 is `max(gops)` for rayon-packed f32 N=4096 at `threads = 8`). *Not claimed:* "BNNS beats the GPU at f16". At N=4096 MPS wins (3,647 vs 3,184), and at matched N=4096 BNNS leads BLAS by 36%, not 22%.
 
 ### Card 4: Vibecodium
 
@@ -217,6 +217,6 @@ Resolved after the builder check: the EchoCare screenshot ships as is (see Anti-
 
 Resolved in the spec review (2026-10-20): the Groundly tiles (0.73 h, 71% vs 67%, search-only setup named), the gemm-bench matrix sizes, Vibecodium's runtimes and commit count, and the MPI labels.
 
-- **CV:** it still says Vibecodium ran 4 languages. The site will say 6 runtimes, so update the CV to match.
+- **CV:** it still says Vibecodium ran 4 languages (the site says 6 runtimes) and gemm-bench "679 GFLOPS f32 (87% of M1 Pro NEON peak)" (the site says 648 GFLOPS, 83% of the 8 P-core peak). Update the CV to match.
 - **MPI data not re-checked:** `speedups_data.csv` wasn't available locally during the review, so 1.82× / 3.52× / 6.51× and the CV's 6.8× are taken as previously extracted.
 - **Experience, Stack, About, Contact:** a later discussion, including the Nokia chart's starting value.
