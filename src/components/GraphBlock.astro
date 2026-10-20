@@ -2,16 +2,18 @@
 import BarChart from "./BarChart.astro";
 import FlowDiagram from "./FlowDiagram.astro";
 import SpecTiles from "./SpecTiles.astro";
+import Pipeline from "./Pipeline.astro";
+import StackedBars from "./StackedBars.astro";
 import type { Graph } from "../data/projects";
 
 interface Props {
   graph: Graph;
 }
 const { graph } = Astro.props;
-if (graph.kind === "pipeline" || graph.kind === "stacked")
-  throw new Error(`graph kind ${graph.kind} not built yet`);
 ---
 
 {graph.kind === "bars" && <BarChart {...graph} />}
 {graph.kind === "flow" && <FlowDiagram {...graph} />}
 {graph.kind === "specs" && <SpecTiles {...graph} />}
+{graph.kind === "pipeline" && <Pipeline {...graph} />}
+{graph.kind === "stacked" && <StackedBars {...graph} />}

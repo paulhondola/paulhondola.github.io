@@ -1,0 +1,40 @@
+---
+import type { PipelineGraph } from "../data/projects";
+
+type Props = Omit<PipelineGraph, "kind">;
+const { caption, steps } = Astro.props;
+---
+
+<figure class="w-full font-mono">
+  <figcaption class="text-muted uppercase tracking-widest text-[10px] mb-5">
+    {caption}
+  </figcaption>
+  <ol class="flex flex-wrap items-center gap-1.5">
+    {
+      steps.map((s, i) => (
+        <>
+          {i > 0 && (
+            <li aria-hidden="true" class="text-muted text-[11px]">
+              →
+            </li>
+          )}
+          <li class="border border-line bg-canvas rounded px-2.5 py-2 text-center">
+            {s.value && (
+              <span class="block text-sm text-text leading-tight">
+                {s.value}
+              </span>
+            )}
+            <span
+              class:list={[
+                "block leading-snug",
+                s.value ? "text-[10px] text-muted" : "text-[11px] text-text",
+              ]}
+            >
+              {s.label}
+            </span>
+          </li>
+        </>
+      ))
+    }
+  </ol>
+</figure>

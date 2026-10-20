@@ -229,6 +229,28 @@ check(
 );
 check("photo optimized", !html.includes('src="/photo/paul.png"'));
 
+// Groundly: local index pipeline, one-file bundle, import flow
+check(
+  "groundly local index",
+  ["187", "1,193", "bge-m3", "13 MB"].every((v) => work.includes(v)),
+);
+check(
+  "groundly bundle",
+  ["42 MB", "16 MB", "apd exports in 5 s"].every((v) => work.includes(v)) &&
+    ["61.9", "38.1", "23.8", "14.3"].every((w) =>
+      work.includes(`width: ${w}%`),
+    ),
+);
+check(
+  "groundly import",
+  [
+    "manifest validated",
+    "zip-slip-safe extraction",
+    "embedding pin checked, re-embed on mismatch",
+    "fresh progress.db",
+  ].every((v) => text.includes(v)),
+);
+
 // Final review fixes
 check(
   "own favicon",

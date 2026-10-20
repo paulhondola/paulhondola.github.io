@@ -142,12 +142,46 @@ export const projects: Project[] = [
         ],
         note: "streaming fp16 embeddings in bounded batches into SQLite",
       },
+      {
+        kind: "pipeline",
+        caption: "indexed locally · apd course · no API key",
+        steps: [
+          { value: "187", label: "files" },
+          { value: "1,193", label: "chunks" },
+          { value: "bge-m3", label: "fp16, on device" },
+          { value: "13 MB", label: "store.db" },
+        ],
+      },
+      {
+        kind: "stacked",
+        caption: "one course = one file · groundly export",
+        max: 42,
+        rows: [
+          { label: "apd · 187 files", display: "42 MB", parts: [26, 16] },
+          { label: "passc · 15 files", display: "16 MB", parts: [10, 6] },
+        ],
+        legend: [
+          "index, vectors and graph",
+          "original files, so citations open the right page",
+        ],
+        note: "apd exports in 5 s",
+      },
     ],
     app: {
       kind: "image",
       src: groundlyCli,
       caption: "the app · groundly CLI",
       alt: "Groundly's command-line help in a terminal, listing its commands",
+      below: {
+        kind: "pipeline",
+        caption: "groundly import",
+        steps: [
+          { label: "manifest validated" },
+          { label: "zip-slip-safe extraction" },
+          { label: "embedding pin checked, re-embed on mismatch" },
+          { label: "fresh progress.db" },
+        ],
+      },
     },
     tiles: [
       {

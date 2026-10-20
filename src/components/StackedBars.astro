@@ -1,0 +1,53 @@
+---
+import type { StackedGraph } from "../data/projects";
+
+type Props = Omit<StackedGraph, "kind">;
+const { caption, max, rows, legend, note } = Astro.props;
+const pct = (v: number) => `width: ${((v / max) * 100).toFixed(1)}%`;
+---
+
+<figure class="w-full font-mono text-xs">
+  <figcaption class="text-muted uppercase tracking-widest text-[10px] mb-5">
+    {caption}
+  </figcaption>
+  <ul class="flex flex-col gap-4">
+    {
+      rows.map((r) => (
+        <li>
+          <div class="flex justify-between gap-3 mb-1.5">
+            <span class="text-body">{r.label}</span>
+            <span class="whitespace-nowrap">
+              <span class="text-muted">
+                {r.parts[0]} + {r.parts[1]} ={" "}
+              </span>
+              <span class="text-text">{r.display}</span>
+            </span>
+          </div>
+          <div class="h-2 bg-canvas rounded-sm overflow-hidden">
+            <div data-grow class="flex h-full w-full origin-left">
+              <div class="h-full bg-signal" style={pct(r.parts[0])} />
+              <div class="h-full bg-muted" style={pct(r.parts[1])} />
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+  <ul class="mt-4 flex flex-col gap-1 text-[11px] text-muted leading-relaxed">
+    {
+      legend.map((l, i) => (
+        <li class="flex items-baseline gap-2">
+          <span
+            aria-hidden="true"
+            class:list={[
+              "inline-block size-2 rounded-sm shrink-0",
+              i === 0 ? "bg-signal" : "bg-muted",
+            ]}
+          />
+          {l}
+        </li>
+      ))
+    }
+  </ul>
+  {note && <p class="mt-2 text-[11px] text-muted">{note}</p>}
+</figure>
