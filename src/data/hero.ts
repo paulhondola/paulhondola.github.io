@@ -17,9 +17,43 @@ export const changes = [
   { from: "prod-vs-dev diff", to: "caught silently dropped legacy entries" },
 ];
 
-export const readouts = [
-  { value: "~18×", label: "Nokia pipeline" },
-  { value: ">16 GB → 5.05 GB", label: "Groundly peak memory" },
-  { value: "679 GFLOPS", label: "gemm-bench, 87% of NEON peak" },
-  { value: "194", label: "EchoCare backend tests" },
+// The hero's stack ladder, metal at the top, cloud at the bottom.
+// `measured` decides the colour: only measurements render in signal green.
+export const ladder = [
+  {
+    layer: "metal",
+    what: "Rust GEMM kernels, std::simd",
+    proof: "679 GFLOPS",
+    measured: true,
+  },
+  {
+    layer: "binaries",
+    what: "x86 reversing, decryptors in C",
+    proof: "5 formats",
+    measured: false,
+  },
+  {
+    layer: "parallel",
+    what: "MPI + OpenMP convolution",
+    proof: "6.8×",
+    measured: true,
+  },
+  {
+    layer: "data",
+    what: "Nokia finance pipelines",
+    proof: "~18×",
+    measured: true,
+  },
+  {
+    layer: "retrieval",
+    what: "Groundly MCP server",
+    proof: ">16 GB → 5.05 GB",
+    measured: true,
+  },
+  {
+    layer: "cloud",
+    what: "EchoCare on Railway",
+    proof: "staging + prod",
+    measured: false,
+  },
 ];

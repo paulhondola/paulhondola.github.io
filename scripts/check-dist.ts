@@ -54,16 +54,17 @@ check("cv link", html.includes('href="/cv/Paul_Hondola_CV.pdf"'));
 check("availability", text.includes("open to full-time · from Jul 2027"));
 check("no react", !html.includes("astro-island"));
 
-// Task 3: hero + readouts
-check(
-  "hero headline",
-  text.includes("Backend &amp; cloud engineer who profiles first.") ||
-    text.includes("Backend & cloud engineer who profiles first."),
-);
+// Task 3: hero (From metal to cloud) + ladder
+const section = (id: string) => {
+  const start = html.indexOf(`id="${id}"`);
+  return html.slice(start, html.indexOf("</section>", start));
+};
+const hero = section("hero");
+check("hero headline", text.includes("From metal to cloud."));
 check(
   "hero sub",
   text.includes(
-    "I take systems apart, measure where the time goes, and put them back together faster.",
+    "I like building complex things, and I like taking them apart even more: to find where they're slow and put them back together better.",
   ),
 );
 check(
@@ -72,8 +73,29 @@ check(
 );
 check("speedup", text.includes("~18×"));
 check(
-  "readouts",
-  ["5.05 GB", "679 GFLOPS", "194"].every((v) => text.includes(v)),
+  "ladder",
+  ["metal", "binaries", "parallel", "data", "retrieval", "cloud"].every((l) =>
+    hero.includes(`>${l}<`),
+  ) &&
+    [
+      "679 GFLOPS",
+      "5 formats",
+      "6.8×",
+      "~18×",
+      "&gt;16 GB → 5.05 GB",
+      "staging + prod",
+    ].every((v) => hero.includes(v)),
+);
+check("no readouts", !html.includes('aria-label="Key numbers"'));
+check(
+  "runtime in experience",
+  section("experience").includes("2h 30") && !hero.includes("2h 30"),
+);
+check(
+  "meta description",
+  html.includes(
+    'name="description" content="From metal to cloud: I build complex systems, then take them apart to make them better. Computer Engineering at UPT, open to full-time roles from Jul 2027."',
+  ),
 );
 check("meta line", text.includes("GPA 9.72/10"));
 check("cta", (html.match(/href="#work"/g) ?? []).length >= 3);

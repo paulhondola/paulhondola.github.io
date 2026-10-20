@@ -1,6 +1,5 @@
 ---
-import RuntimeChart from "./RuntimeChart.astro";
-import { runtime, changes } from "../data/hero";
+import { ladder } from "../data/hero";
 import { cvHref } from "../data/site";
 ---
 
@@ -14,11 +13,11 @@ import { cvHref } from "../data/site";
         data-split
         class="mt-6 text-5xl sm:text-6xl lg:text-7xl leading-[0.95] tracking-[-0.03em]"
       >
-        Backend &amp; cloud engineer who profiles first.
+        From metal to cloud.
       </h1>
       <p class="mt-6 text-lg text-body max-w-md">
-        I take systems apart, measure where the time goes, and put them back
-        together faster.
+        I like building complex things, and I like taking them apart even more:
+        to find where they're slow and put them back together better.
       </p>
       <div class="mt-8 flex flex-wrap gap-3 font-mono text-sm">
         <a
@@ -34,35 +33,31 @@ import { cvHref } from "../data/site";
       </div>
     </div>
 
-    <figure class="bg-surface border border-line rounded-lg p-5 sm:p-6">
-      <figcaption
-        class="flex justify-between font-mono text-[11px] text-muted mb-4"
-      >
-        <span>trace · nokia/finance-pipeline</span>
-        <span>runtime</span>
-      </figcaption>
-      <RuntimeChart points={runtime} />
-      <p class="font-mono text-sm text-signal mt-2">
-        ~18× faster · now runs every 2 h
+    <div class="bg-surface border border-line rounded-lg p-5 sm:p-6">
+      <p class="flex justify-between font-mono text-[11px] text-muted mb-4">
+        <span>stack · where I've worked</span>
+        <span>proof</span>
       </p>
-      <ul
-        class="mt-5 border-t border-line pt-4 flex flex-col gap-1 font-mono text-xs"
-      >
+      <ol data-ladder class="flex flex-col">
         {
-          changes.map((c) => (
-            <li
-              tabindex="0"
-              class="flex flex-wrap gap-x-2 px-2 py-1.5 -mx-2 rounded hover:bg-canvas focus:bg-canvas"
-            >
-              <span class="text-muted">{c.from}</span>
-              <span class="text-muted" aria-hidden="true">
-                →
+          ladder.map((r) => (
+            <li class="grid grid-cols-[5.5rem_1fr_auto] items-baseline gap-x-4 py-3 border-t border-line first:border-t-0">
+              <span class="font-mono text-[10px] uppercase tracking-widest text-muted">
+                {r.layer}
               </span>
-              <span class="text-text">{c.to}</span>
+              <span class="text-text text-sm">{r.what}</span>
+              <span
+                class:list={[
+                  "font-mono text-sm text-right whitespace-nowrap",
+                  r.measured ? "text-signal" : "text-text",
+                ]}
+              >
+                {r.proof}
+              </span>
             </li>
           ))
         }
-      </ul>
-    </figure>
+      </ol>
+    </div>
   </div>
 </section>

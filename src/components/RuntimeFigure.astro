@@ -1,0 +1,35 @@
+---
+import RuntimeChart from "./RuntimeChart.astro";
+import { runtime, changes } from "../data/hero";
+---
+
+<figure class="bg-surface border border-line rounded-lg p-5 sm:p-6">
+  <figcaption
+    class="flex justify-between font-mono text-[11px] text-muted mb-4"
+  >
+    <span>trace · nokia/finance-pipeline</span>
+    <span>runtime</span>
+  </figcaption>
+  <RuntimeChart points={runtime} />
+  <p class="font-mono text-sm text-signal mt-2">
+    ~18× faster · now runs every 2 h
+  </p>
+  <ul
+    class="mt-5 border-t border-line pt-4 flex flex-col gap-1 font-mono text-xs"
+  >
+    {
+      changes.map((c) => (
+        <li
+          tabindex="0"
+          class="flex flex-wrap gap-x-2 px-2 py-1.5 -mx-2 rounded hover:bg-canvas focus:bg-canvas"
+        >
+          <span class="text-muted">{c.from}</span>
+          <span class="text-muted" aria-hidden="true">
+            →
+          </span>
+          <span class="text-text">{c.to}</span>
+        </li>
+      ))
+    }
+  </ul>
+</figure>

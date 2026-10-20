@@ -33,27 +33,48 @@ export function initMotion(): void {
     });
   };
 
-  // Hero: headline, then the chart line draws, then the change rows.
+  // Hero: headline, then the ladder rows.
   const hero = document.querySelector("#hero");
   const h1 = hero?.querySelector("h1[data-split]");
   if (h1) revealWords(h1, { delay: 0.1 });
-  hero?.querySelectorAll<SVGPolylineElement>("[data-draw]").forEach((line) => {
-    const length = line.getTotalLength();
-    gsap.fromTo(
-      line,
-      { strokeDasharray: length, strokeDashoffset: length },
-      { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut", delay: 0.4 },
-    );
-  });
   if (hero) {
-    gsap.from(hero.querySelectorAll("circle, figure li"), {
+    gsap.from(hero.querySelectorAll("[data-ladder] li"), {
       opacity: 0,
       y: 6,
       duration: 0.4,
       stagger: 0.06,
-      delay: 0.9,
+      delay: 0.5,
     });
   }
+
+  // Runtime chart (in Experience): the line draws, then points and change rows.
+  document
+    .querySelectorAll<SVGPolylineElement>("[data-draw]")
+    .forEach((line) => {
+      const length = line.getTotalLength();
+      const trigger = { trigger: line, start: "top 85%", once: true };
+      gsap.fromTo(
+        line,
+        { strokeDasharray: length, strokeDashoffset: length },
+        {
+          strokeDashoffset: 0,
+          duration: 1.4,
+          ease: "power2.inOut",
+          scrollTrigger: trigger,
+        },
+      );
+      const figure = line.closest("figure");
+      if (figure) {
+        gsap.from(figure.querySelectorAll("circle, li"), {
+          opacity: 0,
+          y: 6,
+          duration: 0.4,
+          stagger: 0.06,
+          delay: 0.5,
+          scrollTrigger: trigger,
+        });
+      }
+    });
 
   // Below the hero: headings word by word as they scroll in.
   document
@@ -70,18 +91,6 @@ export function initMotion(): void {
       transformOrigin: "left center",
       duration: 1,
       ease: "power3.out",
-      scrollTrigger: { trigger: el, start: "top 90%", once: true },
-    }),
-  );
-
-  // Tweening textContent itself renders 0 as soon as the trigger is armed,
-  // so the number never shows its final value and then snaps back to 0.
-  document.querySelectorAll("[data-count]").forEach((el) =>
-    gsap.from(el, {
-      textContent: 0,
-      snap: { textContent: 1 },
-      duration: 1.2,
-      ease: "power2.out",
       scrollTrigger: { trigger: el, start: "top 90%", once: true },
     }),
   );

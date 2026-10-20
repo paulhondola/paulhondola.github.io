@@ -4,6 +4,8 @@ export interface Experience {
   period: string;
   stack: string[];
   points: string[];
+  // Renders the Nokia pipeline runtime chart under the points.
+  runtime?: boolean;
 }
 
 export const experiences: Experience[] = [
@@ -11,6 +13,7 @@ export const experiences: Experience[] = [
     role: "Software Engineer Intern",
     company: "Nokia",
     period: "Mar 2026 →",
+    runtime: true,
     stack: ["Python", "pandas", "MariaDB", "Jenkins", "GitLab", "Power BI"],
     points: [
       "Re-architected two financial data pipelines (2 h 15 min + 7 min) into one 8-minute pipeline run every 2 h (~18× faster) by vectorizing row-by-row pandas logic and parallelizing data fetching via v2 API parameters and concurrent exports. A prod-vs-dev diff caught silently dropped legacy entries.",
