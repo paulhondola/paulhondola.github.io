@@ -4,6 +4,10 @@
   --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-jetbrains-mono);
 
+  /* Small-text floor: uppercase captions, then labels/chips/meta rows. */
+  --text-caption: 11px;
+  --text-label: 12px;
+
   --color-canvas: #07090c;
   --color-surface: #0d1116;
   --color-line: #1d252c;

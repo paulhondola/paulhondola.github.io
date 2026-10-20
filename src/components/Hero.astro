@@ -6,7 +6,7 @@ import { cvHref } from "../data/site";
 <section id="hero" class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-20 lg:pt-24">
   <div class="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
     <div>
-      <p class="font-mono text-xs text-muted">
+      <p class="font-mono text-xs text-muted text-balance">
         Timișoara, RO · Computer Engineering @ UPT · GPA 9.72/10
       </p>
       <h1
@@ -22,19 +22,21 @@ import { cvHref } from "../data/site";
       <div class="mt-8 flex flex-wrap gap-3 font-mono text-sm">
         <a
           href="#work"
-          class="bg-text text-canvas px-5 py-3 rounded hover:bg-white transition-colors"
+          class="bg-text text-canvas px-5 py-3 rounded hover:bg-body transition-colors"
           >See the work</a
         >
         <a
           href={cvHref}
           class="border border-line text-text px-5 py-3 rounded hover:border-muted transition-colors"
-          >Download CV ↓</a
+          >Download CV <span aria-hidden="true">↓</span><span class="sr-only">
+            (PDF)</span
+          ></a
         >
       </div>
     </div>
 
     <div class="bg-surface border border-line rounded-lg p-5 sm:p-6">
-      <p class="flex justify-between font-mono text-[11px] text-muted mb-4">
+      <p class="flex justify-between font-mono text-label text-muted mb-4">
         <span>stack · where I've worked</span>
         <span>proof</span>
       </p>
@@ -42,7 +44,7 @@ import { cvHref } from "../data/site";
         {
           ladder.map((r) => (
             <li class="grid grid-cols-[5.5rem_1fr_auto] items-baseline gap-x-4 py-3 border-t border-line first:border-t-0">
-              <span class="font-mono text-[10px] uppercase tracking-widest text-muted">
+              <span class="font-mono text-caption uppercase tracking-widest text-muted">
                 {r.layer}
               </span>
               <span class="text-text text-sm">{r.what}</span>

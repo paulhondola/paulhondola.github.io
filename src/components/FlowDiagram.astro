@@ -5,8 +5,8 @@ type Props = Omit<FlowGraph, "kind">;
 const { caption, columns, highlight } = Astro.props;
 ---
 
-<figure class="w-full flex-1 flex flex-col font-mono text-[11px]">
-  <figcaption class="text-muted uppercase tracking-widest text-[10px] mb-5">
+<figure class="w-full flex-1 flex flex-col font-mono text-label">
+  <figcaption class="text-muted uppercase tracking-widest text-caption mb-5">
     {caption}
   </figcaption>
   <div

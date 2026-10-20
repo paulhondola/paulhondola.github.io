@@ -1,17 +1,24 @@
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-import Lenis from "lenis";
+// ponytail: 513 B, inert until Lenis adds `html.lenis`. Kept static because a
+// dynamic CSS import is referenced but never emitted by the Astro build (404).
 import "lenis/dist/lenis.css";
 
 // Everything is already in its final state in the HTML. Motion only uses
 // gsap.from(), so if this script fails or never runs, the page stays complete.
-export function initMotion(): void {
+export async function initMotion(): Promise<void> {
   const reduced =
     matchMedia("(prefers-reduced-motion: reduce)").matches ||
     // ponytail: query flag lets the browser check exercise this path
     new URLSearchParams(location.search).has("reduced-motion");
   if (reduced) return;
+
+  // Loaded only when motion will run: reduced-motion visitors fetch none of it.
+  const [{ gsap }, { ScrollTrigger }, { SplitText }, { default: Lenis }] =
+    await Promise.all([
+      import("gsap"),
+      import("gsap/ScrollTrigger"),
+      import("gsap/SplitText"),
+      import("lenis"),
+    ]);
 
   gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -97,5 +104,7 @@ export function initMotion(): void {
 
   // Fonts and images change layout; re-measure trigger positions after both.
   document.fonts.ready.then(() => ScrollTrigger.refresh());
-  addEventListener("load", () => ScrollTrigger.refresh());
+  // The imports are async, so `load` may already have fired.
+  if (document.readyState === "complete") ScrollTrigger.refresh();
+  else addEventListener("load", () => ScrollTrigger.refresh());
 }

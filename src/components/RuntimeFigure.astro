@@ -4,9 +4,7 @@ import { runtime, changes } from "../data/hero";
 ---
 
 <figure class="bg-surface border border-line rounded-lg p-5 sm:p-6">
-  <figcaption
-    class="flex justify-between font-mono text-[11px] text-muted mb-4"
-  >
+  <figcaption class="flex justify-between font-mono text-label text-muted mb-4">
     <span>trace · nokia/finance-pipeline</span>
     <span>runtime</span>
   </figcaption>
@@ -19,10 +17,7 @@ import { runtime, changes } from "../data/hero";
   >
     {
       changes.map((c) => (
-        <li
-          tabindex="0"
-          class="flex flex-wrap gap-x-2 px-2 py-1.5 -mx-2 rounded hover:bg-canvas focus:bg-canvas"
-        >
+        <li class="flex flex-wrap gap-x-2 px-2 py-1.5 -mx-2 rounded hover:bg-canvas">
           <span class="text-muted">{c.from}</span>
           <span class="text-muted" aria-hidden="true">
             →

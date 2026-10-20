@@ -33,28 +33,37 @@ import { navLinks, cvHref, availability } from "../data/site";
         {availability}
       </span>
       <a href={cvHref} class="text-text hover:text-signal transition-colors"
-        >CV ↓</a
+        >CV <span aria-hidden="true">↓</span><span class="sr-only">
+          (PDF)</span
+        ></a
       >
     </div>
 
     <details class="md:hidden relative" data-menu>
       <summary
-        class="list-none cursor-pointer text-text px-2 py-1 border border-line rounded"
+        class="list-none [&::-webkit-details-marker]:hidden cursor-pointer text-text h-11 px-3 inline-flex items-center border border-line rounded"
       >
         menu
       </summary>
       <div
-        class="absolute right-0 mt-3 w-64 bg-surface border border-line rounded p-4 flex flex-col gap-3"
+        class="absolute right-0 mt-1.5 w-64 bg-surface border border-line rounded px-4 py-2 flex flex-col"
       >
         {
           navLinks.map((l) => (
-            <a href={l.href} class="text-body hover:text-text">
+            <a
+              href={l.href}
+              class="min-h-11 flex items-center text-body hover:text-text"
+            >
               {l.label}
             </a>
           ))
         }
-        <a href={cvHref} class="text-text">CV ↓</a>
-        <span class="text-muted pt-2 border-t border-line">
+        <a href={cvHref} class="min-h-11 flex items-center text-text"
+          >CV <span aria-hidden="true">↓</span><span class="sr-only">
+            (PDF)</span
+          ></a
+        >
+        <span class="text-muted mt-2 py-3 border-t border-line">
           <span class="text-signal mr-1" aria-hidden="true">●</span>
           {availability}
         </span>
@@ -64,11 +73,19 @@ import { navLinks, cvHref, availability } from "../data/site";
 </header>
 
 <script is:inline>
-  document
-    .querySelectorAll("[data-menu] a")
-    .forEach((a) =>
-      a.addEventListener("click", () =>
-        a.closest("details").removeAttribute("open"),
-      ),
-    );
+  {
+    const menu = document.querySelector("[data-menu]");
+    const close = () => menu.removeAttribute("open");
+    menu
+      .querySelectorAll("a")
+      .forEach((a) => a.addEventListener("click", close));
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape" || !menu.open) return;
+      close();
+      menu.querySelector("summary").focus();
+    });
+    document.addEventListener("click", (e) => {
+      if (menu.open && !menu.contains(e.target)) close();
+    });
+  }
 </script>

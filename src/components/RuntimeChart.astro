@@ -7,13 +7,18 @@ const { points } = Astro.props;
 // Plot area inside a 400×220 viewBox.
 const left = 44;
 const right = 380;
-const top = 24;
+const top = 30;
 const bottom = 180;
 const maxMinutes = 150;
 const x = (i: number) => left + (i * (right - left)) / (points.length - 1);
 const y = (m: number) => bottom - (m / maxMinutes) * (bottom - top);
 const line = points.map((p, i) => `${x(i)},${y(p.minutes)}`).join(" ");
 const grid = [0, 60, 120];
+const mid = (i: number) => i > 0 && i < points.length - 1;
+// Text sits in viewBox units, so it shrinks with the chart. Phones get bigger
+// units to land at ≥11px rendered; from sm the chart is full size (~526px).
+const axis = "fill-muted text-[15px] min-[480px]:text-[12px] sm:text-[9px]";
+const value = "fill-text text-[15px] min-[480px]:text-[13px] sm:text-[11px]";
 ---
 
 <svg
@@ -38,9 +43,10 @@ const grid = [0, 60, 120];
         />
         <text
           x={left - 8}
-          y={y(m) + 3}
+          y={y(m)}
           text-anchor="end"
-          class="fill-muted text-[9px]"
+          dominant-baseline="central"
+          class={axis}
         >
           {m === 0 ? "0" : `${m / 60}h`}
         </text>
@@ -58,13 +64,13 @@ const grid = [0, 60, 120];
     points.map((p, i) => (
       <g>
         <circle cx={x(i)} cy={y(p.minutes)} r="3.5" class="fill-signal" />
+        {/* Middle labels sit higher and to the right of their point, clear of
+            the falling line and staggered against the last label. */}
         <text
-          x={x(i)}
-          y={y(p.minutes) - 10}
-          text-anchor={
-            i === 0 ? "start" : i === points.length - 1 ? "end" : "middle"
-          }
-          class="fill-text text-[11px]"
+          x={mid(i) ? x(i) + 6 : x(i)}
+          y={y(p.minutes) - (mid(i) ? 14 : 10)}
+          text-anchor={i === points.length - 1 ? "end" : "start"}
+          class={value}
         >
           {p.display}
         </text>
@@ -73,7 +79,7 @@ const grid = [0, 60, 120];
             x={x(i)}
             y={bottom + 22}
             text-anchor={i === 0 ? "start" : "end"}
-            class="fill-muted text-[9px] uppercase tracking-widest"
+            class={`${axis} uppercase tracking-widest`}
           >
             {p.label}
           </text>

@@ -6,7 +6,7 @@ const { caption, steps } = Astro.props;
 ---
 
 <figure class="w-full font-mono">
-  <figcaption class="text-muted uppercase tracking-widest text-[10px] mb-5">
+  <figcaption class="text-muted uppercase tracking-widest text-caption mb-5">
     {caption}
   </figcaption>
   <ol class="flex flex-wrap items-center gap-1.5">
@@ -16,7 +16,7 @@ const { caption, steps } = Astro.props;
         // wrapped row starts with "→" instead of ending on a dangling one.
         <li class="flex items-center gap-1.5">
           {i > 0 && (
-            <span aria-hidden="true" class="text-muted text-[11px]">
+            <span aria-hidden="true" class="text-muted text-label">
               →
             </span>
           )}
@@ -28,8 +28,8 @@ const { caption, steps } = Astro.props;
             )}
             <span
               class:list={[
-                "block leading-snug",
-                s.value ? "text-[10px] text-muted" : "text-[11px] text-text",
+                "block leading-snug text-label",
+                s.value ? "text-muted" : "text-text",
               ]}
             >
               {s.label}

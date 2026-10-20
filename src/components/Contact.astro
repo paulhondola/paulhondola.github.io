@@ -29,14 +29,17 @@ import { email, socials, cvHref } from "../data/site";
               rel="noopener"
               class="text-body hover:text-text transition-colors"
             >
-              {s.label} ↗
+              {s.label} <span aria-hidden="true">↗</span>
+              <span class="sr-only">(opens in new tab)</span>
             </a>
           </li>
         ))
     }
     <li>
       <a href={cvHref} class="text-body hover:text-text transition-colors"
-        >CV ↓</a
+        >CV <span aria-hidden="true">↓</span><span class="sr-only">
+          (PDF)</span
+        ></a
       >
     </li>
   </ul>

@@ -11,7 +11,7 @@ const { tiles } = Astro.props;
   {
     tiles.map((t) => (
       <div class="flex flex-col-reverse justify-end bg-surface px-5 py-4">
-        <dt class="text-[11px] text-muted leading-relaxed mt-1.5">{t.label}</dt>
+        <dt class="text-label text-muted leading-relaxed mt-1.5">{t.label}</dt>
         <dd
           class:list={[
             "font-mono text-xl leading-tight",

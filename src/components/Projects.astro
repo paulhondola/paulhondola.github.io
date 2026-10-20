@@ -33,9 +33,10 @@ import { projects, archive } from "../data/projects";
             class="group flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 py-4 hover:bg-surface transition-colors px-2 -mx-2"
           >
             <span class="text-text sm:w-64 shrink-0 group-hover:text-signal transition-colors">
-              {a.title} ↗
+              {a.title} <span aria-hidden="true">↗</span>
             </span>
             <span class="text-body">{a.description}</span>
+            <span class="sr-only">(opens in new tab)</span>
           </a>
         </li>
       ))

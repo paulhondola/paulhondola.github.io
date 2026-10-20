@@ -17,7 +17,7 @@ const pct = (v: number) =>
 ---
 
 <figure class="w-full font-mono text-xs">
-  <figcaption class="text-muted uppercase tracking-widest text-[10px] mb-5">
+  <figcaption class="text-muted uppercase tracking-widest text-caption mb-5">
     {caption}
   </figcaption>
   <ul class="flex flex-col gap-4">
@@ -54,5 +54,11 @@ const pct = (v: number) =>
       ))
     }
   </ul>
-  {note && <p class="mt-4 text-[11px] text-muted leading-relaxed">{note}</p>}
+  {
+    note && (
+      <p class="mt-4 text-label text-muted leading-relaxed text-pretty">
+        {note}
+      </p>
+    )
+  }
 </figure>

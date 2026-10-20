@@ -7,7 +7,7 @@ const pct = (v: number) => `width: ${((v / max) * 100).toFixed(1)}%`;
 ---
 
 <figure class="w-full font-mono text-xs">
-  <figcaption class="text-muted uppercase tracking-widest text-[10px] mb-5">
+  <figcaption class="text-muted uppercase tracking-widest text-caption mb-5">
     {caption}
   </figcaption>
   <ul class="flex flex-col gap-4">
@@ -33,7 +33,7 @@ const pct = (v: number) => `width: ${((v / max) * 100).toFixed(1)}%`;
       ))
     }
   </ul>
-  <ul class="mt-4 flex flex-col gap-1 text-[11px] text-muted leading-relaxed">
+  <ul class="mt-4 flex flex-col gap-1 text-label text-muted leading-relaxed">
     {
       legend.map((l, i) => (
         <li class="flex items-baseline gap-2">
@@ -49,5 +49,5 @@ const pct = (v: number) => `width: ${((v / max) * 100).toFixed(1)}%`;
       ))
     }
   </ul>
-  {note && <p class="mt-2 text-[11px] text-muted">{note}</p>}
+  {note && <p class="mt-2 text-label text-muted text-pretty">{note}</p>}
 </figure>
