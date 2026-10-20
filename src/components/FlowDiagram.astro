@@ -9,7 +9,9 @@ const { caption, columns, highlight } = Astro.props;
   <figcaption class="text-muted uppercase tracking-widest text-[10px] mb-5">
     {caption}
   </figcaption>
-  <div class="flex-1 grid gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center">
+  <div
+    class="flex-1 grid gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center"
+  >
     {
       columns.map((col, i) => (
         <>
