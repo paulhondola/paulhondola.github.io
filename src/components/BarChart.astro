@@ -4,9 +4,16 @@ import type { Bar } from "../data/projects";
 interface Props {
   caption: string;
   bars: Bar[];
+  scale?: "linear" | "log";
+  domain?: [number, number];
+  note?: string;
 }
-const { caption, bars } = Astro.props;
-const max = Math.max(...bars.map((b) => b.value));
+const { caption, bars, scale = "linear", domain, note } = Astro.props;
+const [lo, hi] = domain ?? [0, Math.max(...bars.map((b) => b.value))];
+const pct = (v: number) =>
+  (scale === "log"
+    ? (Math.log10(v) - Math.log10(lo)) / (Math.log10(hi) - Math.log10(lo))
+    : v / hi) * 100;
 ---
 
 <figure class="w-full font-mono text-xs">
@@ -17,24 +24,35 @@ const max = Math.max(...bars.map((b) => b.value));
     {
       bars.map((b) => (
         <li>
-          <div class="flex justify-between mb-1.5">
+          <div class="flex justify-between gap-3 mb-1.5">
             <span class="text-body">{b.label}</span>
-            <span class={b.highlight ? "text-signal" : "text-text"}>
-              {b.display}
+            <span class="whitespace-nowrap">
+              <span class={b.highlight ? "text-signal" : "text-text"}>
+                {b.display}
+              </span>
+              {b.detail && <span class="text-muted"> · {b.detail}</span>}
             </span>
           </div>
-          <div class="h-2 bg-canvas rounded-sm">
+          <div class="relative h-2 bg-canvas rounded-sm">
             <div
               data-grow
               class:list={[
                 "h-full rounded-sm origin-left",
                 b.highlight ? "bg-signal" : "bg-muted",
               ]}
-              style={`width: ${(b.value / max) * 100}%`}
+              style={`width: ${pct(b.value).toFixed(1)}%`}
             />
+            {b.mark !== undefined && (
+              <span
+                aria-hidden="true"
+                class="absolute -top-1 -bottom-1 border-l border-dashed border-text/60"
+                style={`left: ${pct(b.mark).toFixed(1)}%`}
+              />
+            )}
           </div>
         </li>
       ))
     }
   </ul>
+  {note && <p class="mt-4 text-[11px] text-muted leading-relaxed">{note}</p>}
 </figure>

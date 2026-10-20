@@ -1,7 +1,8 @@
 ---
-import { Image } from "astro:assets";
-import BarChart from "./BarChart.astro";
-import DeliveryPath from "./DeliveryPath.astro";
+import { Image, getImage } from "astro:assets";
+import GraphBlock from "./GraphBlock.astro";
+import SpecTiles from "./SpecTiles.astro";
+import InfoTiles from "./InfoTiles.astro";
 import type { Project } from "../data/projects";
 
 interface Props {
@@ -15,33 +16,21 @@ const trace = [
   ["measured", p.measured],
   ["decided", p.decided],
 ];
+// Clicking a screenshot opens its largest optimized size: no lightbox, no JS.
+const full =
+  p.app.kind === "image"
+    ? await getImage({
+        src: p.app.src,
+        width: Math.min(p.app.src.width, 2400),
+      })
+    : undefined;
 ---
 
 <article
   data-project
-  class="grid lg:grid-cols-[2fr_3fr] bg-surface border border-line rounded-lg overflow-hidden"
+  class="bg-surface border border-line rounded-lg overflow-hidden"
 >
-  <div
-    class="border-b lg:border-b-0 lg:border-r border-line p-6 flex items-center bg-canvas/40"
-  >
-    {
-      p.media.kind === "image" ? (
-        <Image
-          src={p.media.src}
-          alt={p.media.alt}
-          widths={[480, 800]}
-          sizes="(min-width: 1024px) 440px, 100vw"
-          class="w-full h-auto rounded border border-line"
-        />
-      ) : p.media.kind === "bars" ? (
-        <BarChart caption={p.media.caption} bars={p.media.bars} />
-      ) : (
-        <DeliveryPath caption={p.media.caption} steps={p.media.steps} />
-      )
-    }
-  </div>
-
-  <div class="p-6 sm:p-8 flex flex-col gap-4">
+  <header class="p-6 sm:p-8 flex flex-col gap-3">
     <div
       class="flex flex-wrap justify-between gap-x-4 gap-y-1 font-mono text-[11px] text-muted"
     >
@@ -69,10 +58,81 @@ const trace = [
     </div>
 
     <h3 data-split class="text-3xl sm:text-4xl">{p.title}</h3>
-    <p class="font-mono text-sm sm:text-base text-signal">{p.metric}</p>
+    <p class="text-lg text-text leading-snug">{p.what}</p>
+    <p class="font-mono text-[13px] leading-relaxed">
+      {
+        p.proof.map((part, i) => (
+          <>
+            {i > 0 && <span class="text-muted"> · </span>}
+            <span class={part.measured ? "text-signal" : "text-text"}>
+              {part.text}
+            </span>
+          </>
+        ))
+      }
+    </p>
+    <ul class="flex flex-wrap gap-1.5 pt-1">
+      {
+        p.tech.map((t) => (
+          <li class="font-mono text-[11px] border border-line rounded px-2 py-0.5 text-body">
+            {t}
+          </li>
+        ))
+      }
+    </ul>
+  </header>
 
+  <div class="grid lg:grid-cols-[1fr_1.35fr] border-t border-line">
+    <div class="p-5 sm:p-6 flex flex-col gap-8">
+      {p.graphs.map((g) => <GraphBlock graph={g} />)}
+    </div>
+    <div
+      class="p-5 sm:p-6 flex flex-col gap-6 border-t lg:border-t-0 lg:border-l border-line"
+    >
+      {
+        p.app.kind === "image" && full ? (
+          <figure class="font-mono">
+            <figcaption class="text-muted uppercase tracking-widest text-[10px] mb-5">
+              {p.app.caption}
+            </figcaption>
+            <a
+              href={full.src}
+              class="block rounded hover:opacity-90 transition-opacity"
+            >
+              <Image
+                src={p.app.src}
+                alt={p.app.alt}
+                widths={[640, 1000, 1400]}
+                sizes="(min-width: 1024px) 620px, 100vw"
+                class="w-full h-auto rounded border border-line"
+              />
+            </a>
+          </figure>
+        ) : (
+          p.app.kind === "specs" && <SpecTiles {...p.app} />
+        )
+      }
+      {
+        p.app.kind === "image" && p.app.below && (
+          <GraphBlock graph={p.app.below} />
+        )
+      }
+    </div>
+  </div>
+
+  {p.tiles && <InfoTiles tiles={p.tiles} />}
+
+  <details class="group border-t border-line">
+    <summary
+      class="font-mono text-xs text-muted cursor-pointer px-6 sm:px-8 py-3 list-none [&::-webkit-details-marker]:hidden hover:text-text transition-colors"
+    >
+      <span
+        aria-hidden="true"
+        class="inline-block transition-transform group-open:rotate-90">▸</span
+      > problem · tried · measured · decided
+    </summary>
     <dl
-      class="grid sm:grid-cols-[6rem_1fr] gap-x-4 gap-y-1 sm:gap-y-3 font-mono text-[13px] leading-relaxed"
+      class="grid sm:grid-cols-[6rem_1fr] gap-x-4 gap-y-1 sm:gap-y-3 px-6 sm:px-8 pb-6 pt-2 font-mono text-[13px] leading-relaxed max-w-4xl"
     >
       {
         trace.map(([label, value]) => (
@@ -83,15 +143,5 @@ const trace = [
         ))
       }
     </dl>
-
-    <ul class="flex flex-wrap gap-1.5 pt-1">
-      {
-        p.tech.map((t) => (
-          <li class="font-mono text-[11px] border border-line rounded px-2 py-0.5 text-body">
-            {t}
-          </li>
-        ))
-      }
-    </ul>
-  </div>
+  </details>
 </article>

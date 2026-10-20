@@ -123,7 +123,7 @@ The **image-processing card has no tiles row**: its specs fill the right half in
   - `red: incident opened` → `DAS dispatcher takes the call` → `resolved`
 
   Source: the EchoCare spec README.
-- **App:** `echocare_dashboard.png`, with the macOS menu bar cropped off. *(My call: crop the file itself, the top 80 px of the original, rather than hiding it with CSS. Check by eye that the window's top border survives.)*
+- **App:** `echocare_dashboard.png`, with the macOS menu bar cropped off. *(My call: crop the file itself, the top 65 px of the original (the menu bar ends at row 64), rather than hiding it with CSS, so the window's top border survives.)*
 - **Tiles (all text, none are measurements):**
   - **AI agent:** calls each senior in Romanian during a heatwave or frost. The server turns the answers into green / yellow / red
   - **ElevenLabs voice:** Twilio and Google transcribe the senior, ElevenLabs speaks the agent's replies. The backend only ever sees text, and no audio is stored *(Paul confirmed: ElevenLabs for the voice only)*

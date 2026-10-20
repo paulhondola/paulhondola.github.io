@@ -131,6 +131,80 @@ check(
 );
 check("optimized images", !html.includes('src="/projects/'));
 
+// Hero and project cards: graphs | app, tiles, collapsible trace
+const work = section("work");
+check("details per card", (work.match(/<details/g) ?? []).length === 5);
+check(
+  "what lines",
+  [
+    "Local-first MCP RAG server for learning progress",
+    "Large-scale agentic monitoring for seniors living alone",
+    "An Apple Silicon-first, hand-tuned GEMM benchmark across CPU, AMX and GPU",
+    "Real-time collaborative IDE · 1st place, iTEC 2026 (web dev)",
+    "2D convolution on images up to 16800×12600 px, five execution models",
+  ].every((w) => text.includes(w)),
+);
+check("no tests count", !/\b194\b/.test(text));
+check(
+  "six runtimes",
+  text.includes("sandboxed in 6 runtimes") &&
+    text.includes("Python, Node, Bun, C++, Rust, Go") &&
+    !text.includes("6 languages"),
+);
+check(
+  "tiles",
+  [
+    "17% → 60%",
+    "71% vs 67%",
+    "0.73 h",
+    "ElevenLabs voice",
+    "every 15 min",
+    "instantly",
+    "3,538",
+    "82%",
+    "+22%",
+    "4,721",
+    "Yjs CRDT",
+    "99 / 233",
+  ].every((v) => text.includes(v)),
+);
+check(
+  "gemm graphs",
+  ["0.525", "92.8", "1,897", "2,318", "2,886"].every((v) => work.includes(v)),
+);
+check(
+  "log bars",
+  work.includes("width: 18.0%") && work.includes("left: 97.3%"),
+);
+check(
+  "mpi scaling",
+  ["1.82×", "3.52×", "6.51×", "91%", "88%", "81%", "8 × 1 thread"].every((v) =>
+    work.includes(v),
+  ),
+);
+check(
+  "retracted numbers gone",
+  !text.includes("15.0 h") &&
+    !text.includes("71% vs 60%") &&
+    !text.includes("same matrix") &&
+    !text.includes("beating the GPU"),
+);
+check(
+  "flow",
+  text.includes("AI agent calls the senior") &&
+    text.includes("DAS dispatcher takes the call"),
+);
+check("old chart png gone", !html.includes("image_processing_bench"));
+check("no empty alt", !/<img [^>]*alt=""/.test(html));
+check(
+  "full-size image links",
+  (
+    work.match(
+      /<a [^>]*href="\/_astro\/[^"]+"[^>]*>\s*<img [^>]*alt="[^"]+"/g,
+    ) ?? []
+  ).length === 4,
+);
+
 // Task 5: experience, stack, about, contact
 check(
   "sections",

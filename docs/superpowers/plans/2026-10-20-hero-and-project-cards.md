@@ -192,13 +192,13 @@ Expected: FAIL, including at least `details per card`, `what lines`, `no tests c
 
 - [ ] **Step 3: Crop the EchoCare screenshot**
 
-This removes the macOS menu bar (the top 80 px of the 3456×2234 original):
+This removes the macOS menu bar (the top 65 px of the 3456×2234 original (menu bar ends at row 64; 80 px cut the window border)):
 
 ```bash
-node -e "const s=require('sharp');s('src/assets/projects/echocare_dashboard.png').extract({left:0,top:80,width:3456,height:2154}).toBuffer().then(b=>s(b).toFile('src/assets/projects/echocare_dashboard.png'))"
+node -e "const s=require('sharp');s('src/assets/projects/echocare_dashboard.png').extract({left:0,top:65,width:3456,height:2169}).toBuffer().then(b=>s(b).toFile('src/assets/projects/echocare_dashboard.png'))"
 ```
 
-Verify: `sips -g pixelHeight src/assets/projects/echocare_dashboard.png` prints `2154`. View the image's top edge: the window's rounded top border is visible, and the menu bar (Zen, File, Edit…) is gone.
+Verify: `sips -g pixelHeight src/assets/projects/echocare_dashboard.png` prints `2169`. View the image's top edge: the window's rounded top border is visible, and the menu bar (Zen, File, Edit…) is gone.
 
 - [ ] **Step 4: Implement the components**
 
