@@ -12,13 +12,15 @@ const { caption, steps } = Astro.props;
   <ol class="flex flex-wrap items-center gap-1.5">
     {
       steps.map((s, i) => (
-        <>
+        // The arrow lives in the same item as the step it points to, so a
+        // wrapped row starts with "→" instead of ending on a dangling one.
+        <li class="flex items-center gap-1.5">
           {i > 0 && (
-            <li aria-hidden="true" class="text-muted text-[11px]">
+            <span aria-hidden="true" class="text-muted text-[11px]">
               →
-            </li>
+            </span>
           )}
-          <li class="border border-line bg-canvas rounded px-2.5 py-2 text-center">
+          <span class="border border-line bg-canvas rounded px-2.5 py-2 text-center">
             {s.value && (
               <span class="block text-sm text-text leading-tight">
                 {s.value}
@@ -32,8 +34,8 @@ const { caption, steps } = Astro.props;
             >
               {s.label}
             </span>
-          </li>
-        </>
+          </span>
+        </li>
       ))
     }
   </ol>
