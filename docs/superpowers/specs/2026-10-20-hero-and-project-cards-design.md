@@ -28,7 +28,7 @@ The audience is the same as before: hiring managers. After 30 seconds they shoul
 
 ## Anti-goals (a failure even if it works)
 
-- **Any number without a source,** or one worded more strongly than its source allows. Examples already caught in brainstorming: "17–28% of agents don't search" was a fact about a stripped-down test setup, not the product. "Verified pixel-for-pixel" wasn't checked. "ElevenLabs does speech-to-text" isn't true.
+- **Any number without a source,** or one worded more strongly than its source allows. Examples already caught in brainstorming: "17–28% of agents don't search" was a fact about a stripped-down test setup, not the product. "Verified pixel-for-pixel" wasn't checked. "ElevenLabs does speech-to-text" isn't true. Caught in the spec review (2026-10-20): best runs at different matrix sizes presented as "same matrix", a retracted 15 h build time, GraphRAG numbers from its weakest graph build, and Node + Bun counted as two languages.
 - **Green on something that isn't a measurement.** `--color-signal` is "reserved for measured results only" (`src/styles/global.css`). Counts, limits and feature names render in `text` white.
 - **Screenshots stretched or zoomed to fill a box.** Brainstorming hit this twice: gemm-bench and Groundly both cropped badly when the graph column grew taller than the photo. Photos keep their own proportions, and the columns are balanced by content, not by `object-fit: cover`.
 - **Personal data in screenshots.** The EchoCare dashboard's names are all seeded test data, and the dispatcher shown (Cristian Pavel) is fine to appear (Paul confirmed, 2026-10-20). Any new screenshot needs the same check before it's committed, because committing to this public repo publishes it.
@@ -106,11 +106,11 @@ The **image-processing card has no tiles row**: its specs fill the right half in
      Note: "index, vectors and graph · original files, so citations open the right page · apd exports in 5 s".
 - **App:** `groundly.png` (help-only terminal). Under it, *groundly import* as four chips: `manifest validated → zip-slip-safe extraction → embedding pin checked, re-embed on mismatch → fresh progress.db`.
 - **Tiles:**
-  - **17% → 60%** (signal): how often a coding agent searched the course on its own, after I rewrote the tool descriptions and server instructions together (48 questions, p = 1.9e-05)
-  - **71% vs 60%** (signal): hit rate at 8 chunks. Plain hybrid retrieval beat GraphRAG at every cutoff, so the 15-hour graph build left the default path
+  - **17% → 60%** (signal): how often a coding agent given only the search tool searched the course unprompted, after I rewrote the tool descriptions and server instructions together (48 questions, p = 1.9e-05)
+  - **71% vs 67%** (signal): hit rate at 8 chunks, plain hybrid retrieval vs GraphRAG on its best graph build. Retrieval led at 5, 8, 10 and 20 chunks on every build, so the graph left the default path
   - **verified** (text): the agent writes flashcards, Groundly re-retrieves each one and rejects any its citations don't support, then exports to Anki
-  - **15.0 h** (signal): the local graph build a coursemate skips by importing the bundle instead (apd, measured)
-- **Sources:** `groundly/docs/thesis/experiments.md` (decisions 28, 30, 31 and the tables); `docs/architecture/data-model.md` (export/import); `~/.groundly/{apd,passc}/manifest.json` and `du` for counts and `store.db` size; `groundly export` run on 2026-10-20 (apd 42 MB / 26 MB `--no-materials`, 5.06 s; passc 16 MB / 10 MB); `~/.groundly/apd/graph/stats.json` (54,064 s = 15.0 h).
+  - **0.73 h** (signal): the graph build a coursemate skips by importing the bundle instead (apd, gpt-oss-120b, measured)
+- **Sources:** `groundly/docs/thesis/experiments.md` (decisions 28, 30, 31 and the tables; hit@8 0.708 vs 0.667 is decision 28's best build, gpt-oss-120b at gleanings=1); `docs/architecture/data-model.md` (export/import); `~/.groundly/{apd,passc}/manifest.json` and `du` for counts and `store.db` size; `groundly export` run on 2026-10-20 (apd 42 MB / 26 MB `--no-materials`, 5.06 s; passc 16 MB / 10 MB); `~/.groundly/apd/graph/stats.json` (`total_runtime` 2,618 s = 0.73 h, `extraction_model` gpt-oss-120b in the manifest). *Not used:* the "15.0 h" local build, which decision 28 retracts as a concurrency artifact, and the weakest build's 71% vs 60%.
 
 ### Card 2: EchoCare
 
@@ -123,7 +123,7 @@ The **image-processing card has no tiles row**: its specs fill the right half in
   - `red: incident opened` → `DAS dispatcher takes the call` → `resolved`
 
   Source: the EchoCare spec README.
-- **App:** `echocare_dashboard.png`, with the macOS menu bar cropped off. *(My call: crop the file itself, top ~3.2% / ~70px of the original, rather than hiding it with CSS.)*
+- **App:** `echocare_dashboard.png`, with the macOS menu bar cropped off. *(My call: crop the file itself, the top 80 px of the original, rather than hiding it with CSS. Check by eye that the window's top border survives.)*
 - **Tiles (all text, none are measurements):**
   - **AI agent:** calls each senior in Romanian during a heatwave or frost. The server turns the answers into green / yellow / red
   - **ElevenLabs voice:** Twilio and Google transcribe the senior, ElevenLabs speaks the agent's replies. The backend only ever sees text, and no audio is stored *(Paul confirmed: ElevenLabs for the voice only)*
@@ -139,7 +139,7 @@ The **image-processing card has no tiles row**: its specs fill the right half in
 - **Proof (signal):** `679 GFLOPS f32 · 87% of the M1 Pro's NEON peak`
 - **Graphs:**
   1. *my CPU tuning · f32 · log scale:* `naive ijk 0.525` → `packed, 1 core 92.8` → `rayon-packed, 8 P-cores 679` (signal), with a dashed mark at the 8-core NEON peak (777 GFLOPS). Note: "dashed line = NEON peak · ~1,300× from naive to tuned".
-  2. *same matrix, every engine · f32:* linear bars, max 3,538:
+  2. *best run per engine · f32:* linear bars, max 3,538:
      - CPU · my rayon-packed 679
      - AMX · Accelerate BLAS 1,897
      - AMX · Accelerate BNNS 2,318
@@ -152,33 +152,33 @@ The **image-processing card has no tiles row**: its specs fill the right half in
 - **Tiles (all signal):**
   - **3,538:** GFLOPS f32 on the GPU through Apple's MPS, the fastest f32 result on the M1 Pro
   - **82%:** of MPS reached by my hand-written Metal simdgroup shader (2,886 GFLOPS f32), 97% at f16 *(Paul confirmed the shader is his)*
-  - **+22%:** BNNS over BLAS on the same AMX coprocessor: 2,318 vs 1,897 GFLOPS f32
-  - **4,721:** GFLOPS f16 on AMX through BNNS, beating the GPU's 3,647 at that precision
-- **Sources:** `gemm-bench/data/db/paulhondola/m1pro.sqlite` (`max(gops)` per kernel and precision), `data/peaks.csv` (777.216 f32 8-core peak), and the dashboard's optimization ladder (0.525 / 92.8 / 679).
+  - **+22%:** BNNS's best over BLAS's best on the same AMX coprocessor: 2,318 GFLOPS f32 at N=4096 vs 1,897 at N=1024
+  - **4,721:** GFLOPS f16 on AMX through BNNS at N=1024, the fastest f16 result on the M1 Pro
+- **Sources:** `gemm-bench/data/db/paulhondola/m1pro.sqlite` (`max(gops)` per kernel and precision), `data/peaks.csv` (777.216 f32 8-core peak), and the dashboard's optimization ladder (0.525 / 92.8 / 679, all at N=4096). *Not claimed:* "BNNS beats the GPU at f16". At N=4096 MPS wins (3,647 vs 3,184), and at matched N=4096 BNNS leads BLAS by 36%, not 22%.
 
 ### Card 4: Vibecodium
 
 - **Meta:** `04 · co-lead · team of 4 · Mar – Jun 2026` · github ↗
 - **What:** Real-time collaborative IDE · 1st place, iTEC 2026 (web dev)
-- **Proof (text):** `user code sandboxed in 6 languages · 2 GB cap · no network · 3 s timeout` *(Paul's decision: 6, as in the repo README, not the CV's 4)*
-- **Graph half:** spec tiles, *sandbox limits*: `6` languages (Python, Node, Bun, C++, Rust, Go) · `2 GB` memory cap · `none` network access · `3 s` timeout. All white.
+- **Proof (text):** `user code sandboxed in 6 runtimes · 2 GB cap · no network · 3 s timeout` *(Paul's decision: 6, as in the repo README's six Docker images, not the CV's 4. "Runtimes", because Node and Bun both run JavaScript.)*
+- **Graph half:** spec tiles, *sandbox limits*: `6` runtimes (Python, Node, Bun, C++, Rust, Go) · `2 GB` memory cap · `none` network access · `3 s` timeout. All white.
 - **App:** `vibecodium_editor.png` (existing).
 - **Tiles:**
   - **Yjs CRDT** (text): every keystroke merges conflict-free across clients, with per-user cursors and file focus in per-project WebSocket rooms
   - **accept / reject** (text): the AI agent's edits land as a diff overlay in the editor, and nothing is written until a person accepts it
   - **pre-scan** (text): static checks block `rm -rf /`, fork bombs and `mkfs` before a container ever starts
-  - **99 / 224** (text, it's a count): commits, top contributor of 6
-- **Sources:** `vibecodium/README.md`; `git shortlog -sn HEAD` (Paul Hondola 99 of 224).
+  - **99 / 233** (text, it's a count): commits, the most of anyone on the team
+- **Sources:** `vibecodium/README.md`; `git shortlog -sn HEAD` on 2026-10-20 (Paul Hondola 99 of 233).
 
 ### Card 5: Distributed Image Processing (Paul: "looks good")
 
 - **Meta:** `05 · Parallel Algorithms coursework · Dec 2025 – Feb 2026` · github ↗
 - **What:** 2D convolution on images up to 16800×12600 px, five execution models
-- **Proof (signal):** `median 6.8× speedup with 8 MPI processes` (the CV's figure: a median over all 8-process runs)
-- **Graph half:** *MPI scaling · 16800×12600 px · 3×3 kernel*, redrawn from the repo's data, replacing the white seaborn PNG. Each bar has a dashed perfect-scaling mark.
-  - 2 processes 1.82× · 91%
-  - 4 processes 3.52× · 88%
-  - 8 processes 6.51× · 81% (signal)
+- **Proof (signal):** `median 6.8× speedup over all 8-process runs` (the CV's figure: a median over every 8-process configuration)
+- **Graph half:** *MPI scaling · 1 thread per process · 16800×12600 px · 3×3 kernel*, redrawn from the repo's data, replacing the white seaborn PNG. Each bar has a dashed perfect-scaling mark. The labels say `× 1 thread` so the 8-process bar can't be read as the proof line's 6.8×.
+  - 2 × 1 thread 1.82× · 91%
+  - 4 × 1 thread 3.52× · 88%
+  - 8 × 1 thread 6.51× · 81% (signal)
 
   Note: "dashed line = perfect scaling · % = parallel efficiency · median of 10 runs". Configurations are processes × 1 thread.
 - **Right half (no app):** *the build · specs*, four white tiles:
@@ -198,9 +198,9 @@ Unchanged.
 
 - **Data shape:** `Project.media` becomes a `graphs` part and an `app` part, with tiles and spec tiles alongside. An honest shape: a list of typed graph blocks (`bars`, `logBars`, `stackedBars`, `pipeline`, `flow`, `specs`) for the left; `app` as either an image (plus optional chips underneath) or specs; `tiles` as `{ value, label, measured }[]`, optional. A graph type used once (`flow`, `stackedBars`) can be a small component. Don't build a general chart engine.
 - **Existing components to reuse:** `BarChart.astro` (add the perfect-scaling or peak mark and log mode, or make a sibling), and the `data-grow` motion hook for bars. `DeliveryPath.astro` loses its only user (EchoCare's CI path) and can go.
-- **Trace text must match the new facts.** EchoCare's "measured" text mentions 194 tests: rewrite it without them. Vibecodium's "measured" says "4 languages": change it to 6.
+- **Trace text must match the new facts.** EchoCare's "measured" text mentions 194 tests: rewrite it without them. Vibecodium's "measured" says "4 languages": change it to "6 runtimes".
 - **`check-dist.ts` updates:** replace "hero headline", "hero sub" and "readouts" with checks for `From metal to cloud.` and the six ladder layers. Keep "runtime series" (the chart still renders, in Experience). Add checks that `image_processing_bench` isn't referenced and that each project card has a `<details>`. The green-only-for-measurements rule is enforced by review, not by a test.
-- **Page meta:** `Layout.astro`'s description says "who profiles first". Update it to the new framing. *(My call: keep the `<title>` "Paul Hondola: Backend & Cloud Engineer", since it's what people search for.)*
+- **Page meta:** `Layout.astro`'s description says "who profiles first". Update it to the new framing: `From metal to cloud: I build complex systems, then take them apart to make them better. Computer Engineering at UPT, open to full-time roles from Jul 2027.` *(My call: keep the `<title>` "Paul Hondola: Backend & Cloud Engineer", since it's what people search for.)*
 - **Commit the three new PNGs** with the change.
 
 ## Left to the builder
@@ -215,6 +215,8 @@ Unchanged.
 
 Resolved after the builder check: the EchoCare screenshot ships as is (see Anti-goals). Green is used only on measured parts: the agent box outline, the Vibecodium commit count and the Groundly proof line are adjusted to match.
 
+Resolved in the spec review (2026-10-20): the Groundly tiles (0.73 h, 71% vs 67%, search-only setup named), the gemm-bench matrix sizes, Vibecodium's runtimes and commit count, and the MPI labels.
 
-- **CV:** it still says Vibecodium ran 4 languages. The site will say 6, so update the CV to match.
+- **CV:** it still says Vibecodium ran 4 languages. The site will say 6 runtimes, so update the CV to match.
+- **MPI data not re-checked:** `speedups_data.csv` wasn't available locally during the review, so 1.82× / 3.52× / 6.51× and the CV's 6.8× are taken as previously extracted.
 - **Experience, Stack, About, Contact:** a later discussion, including the Nokia chart's starting value.
