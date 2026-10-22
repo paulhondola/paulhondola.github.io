@@ -1,0 +1,30 @@
+# Git hooks. Install once per clone with `lefthook install`.
+
+pre-commit:
+  jobs:
+    - name: format
+      glob: "*.{astro,ts,js,mjs,json,css,md,yml,yaml}"
+      run: npx prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+
+    - name: lint
+      glob: "*.{astro,ts,js,mjs}"
+      run: npx oxlint {staged_files}
+
+    # The PDF is committed (Astro serves it from public/), so rebuild it
+    # whenever the source changes and add it to the same commit.
+    - name: cv
+      glob: "cv/*.tex"
+      run: >-
+        latexmk -pdf -interaction=nonstopmode -halt-on-error
+        -outdir=cv/build cv/Paul_Hondola_CV.tex
+        && cp cv/build/Paul_Hondola_CV.pdf public/cv/
+        && git add public/cv/Paul_Hondola_CV.pdf
+
+pre-push:
+  jobs:
+    - name: check
+      run: npm run check
+    # Builds the site, then asserts on dist/.
+    - name: test
+      run: npm test
