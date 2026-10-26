@@ -275,6 +275,39 @@ check(
   html.includes("&gt;16 GB → 5.05 GB") && !/[^~]18×/.test(text),
 );
 
+// Task: Sitemap & robots.txt
+check("sitemap-index exists", existsSync("dist/sitemap-index.xml"));
+check("sitemap-0 exists", existsSync("dist/sitemap-0.xml"));
+if (existsSync("dist/sitemap-0.xml")) {
+  const sitemap0 = readFileSync("dist/sitemap-0.xml", "utf8");
+  check(
+    "sitemap includes root",
+    sitemap0.includes("https://paulhondola.github.io/"),
+  );
+  check(
+    "sitemap includes cv",
+    sitemap0.includes("https://paulhondola.github.io/cv/Paul_Hondola_CV.pdf"),
+  );
+  check(
+    "sitemap includes gemm-bench",
+    sitemap0.includes("https://paulhondola.github.io/gemm-bench/"),
+  );
+}
+check(
+  "layout sitemap link",
+  html.includes('<link rel="sitemap" href="/sitemap-index.xml"'),
+);
+check("robots.txt exists", existsSync("dist/robots.txt"));
+if (existsSync("dist/robots.txt")) {
+  const robots = readFileSync("dist/robots.txt", "utf8");
+  check("robots user-agent", robots.includes("User-agent: *"));
+  check("robots allow", robots.includes("Allow: /"));
+  check(
+    "robots sitemap",
+    robots.includes("Sitemap: https://paulhondola.github.io/sitemap-index.xml"),
+  );
+}
+
 if (fails.length) {
   console.error("FAIL:\n  " + fails.join("\n  "));
   process.exit(1);

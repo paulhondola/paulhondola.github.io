@@ -3,3 +3,5 @@ node_modules/
 .astro/
 docs/
 package-lock.json
+.remember/
+.superpowers/
