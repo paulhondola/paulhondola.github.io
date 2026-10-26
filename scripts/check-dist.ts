@@ -308,6 +308,60 @@ if (existsSync("dist/robots.txt")) {
   );
 }
 
+// Task: LLMs discovery
+check("llms.txt exists", existsSync("dist/llms.txt"));
+check("llms-full.txt exists", existsSync("dist/llms-full.txt"));
+
+if (existsSync("dist/llms.txt") && existsSync("dist/llms-full.txt")) {
+  const llms = readFileSync("dist/llms.txt", "utf8");
+  const llmsFull = readFileSync("dist/llms-full.txt", "utf8");
+
+  check("llms title", llms.includes("# Paul Hondola"));
+  check("llms headline", llms.includes("From metal to cloud"));
+  check(
+    "llms full link",
+    llms.includes("https://paulhondola.github.io/llms-full.txt"),
+  );
+  check(
+    "llms cv link",
+    llms.includes("https://paulhondola.github.io/cv/Paul_Hondola_CV.pdf"),
+  );
+  check(
+    "llms projects",
+    ["Groundly", "EchoCare", "gemm-bench", "Vibecodium"].every((p) =>
+      llms.includes(p),
+    ),
+  );
+  check(
+    "llms echocare private",
+    llms.includes("private repo") &&
+      !llms.includes("github.com/paulhondola/EchoCare"),
+  );
+
+  // Full traces in llms-full.txt
+  check(
+    "llms-full traces",
+    ["Problem", "Tried", "Measured", "Decided"].every((t) =>
+      llmsFull.includes(t),
+    ),
+  );
+  check(
+    "llms-full numbers",
+    ["648 GFLOPS", "187", "1,193", "6.51×"].every((n) => llmsFull.includes(n)),
+  );
+  check(
+    "llms-full archive",
+    ["Smart Shopping Assistant", "ArchLens", "AtomC", "DMM"].every((a) =>
+      llmsFull.includes(a),
+    ),
+  );
+  check(
+    "llms no placeholders",
+    !/placeholder|lorem|TODO|TBD/i.test(llms) &&
+      !/placeholder|lorem|TODO|TBD/i.test(llmsFull),
+  );
+}
+
 if (fails.length) {
   console.error("FAIL:\n  " + fails.join("\n  "));
   process.exit(1);

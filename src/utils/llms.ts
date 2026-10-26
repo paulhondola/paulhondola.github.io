@@ -140,6 +140,56 @@ export function generateLlmsFullTxt(): string {
       }
       lines.push("");
     }
+
+    if (p.graphs && p.graphs.length > 0) {
+      lines.push("#### Architecture & Benchmark Data");
+      for (const g of p.graphs) {
+        lines.push(`- **${g.caption}**:`);
+        if (g.kind === "bars") {
+          for (const b of g.bars) {
+            const detail = b.detail ? ` (${b.detail})` : "";
+            lines.push(`  - ${b.label}: ${b.display}${detail}`);
+          }
+        } else if (g.kind === "pipeline") {
+          const steps = g.steps
+            .map((s) => (s.value ? `${s.value} ${s.label}` : s.label))
+            .join(" → ");
+          lines.push(`  - ${steps}`);
+        } else if (g.kind === "stacked") {
+          for (const r of g.rows) {
+            lines.push(`  - ${r.label}: ${r.display}`);
+          }
+        } else if (g.kind === "specs") {
+          for (const s of g.specs) {
+            lines.push(`  - ${s.label}: ${s.value}`);
+          }
+        } else if (g.kind === "flow") {
+          for (const col of g.columns) {
+            lines.push(`  - ${col.join(" → ")}`);
+          }
+        }
+        if ("note" in g && g.note) {
+          lines.push(`  - Note: ${g.note}`);
+        }
+      }
+      lines.push("");
+    }
+
+    if (p.app.kind === "specs") {
+      lines.push(`- **${p.app.caption}**:`);
+      for (const s of p.app.specs) {
+        lines.push(`  - ${s.label}: ${s.value}`);
+      }
+      lines.push("");
+    } else if (p.app.kind === "image" && p.app.below) {
+      const below = p.app.below;
+      lines.push(`- **${below.caption}**:`);
+      const steps = below.steps
+        .map((s) => (s.value ? `${s.value} ${s.label}` : s.label))
+        .join(" → ");
+      lines.push(`  - ${steps}`);
+      lines.push("");
+    }
   }
 
   lines.push("## Professional Experience");

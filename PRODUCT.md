@@ -29,6 +29,7 @@ Works at every layer, from metal to cloud, and every claim has a number or a sou
 ## Capabilities and Constraints
 
 - **Single long page.** No case-study pages, blog, CMS, analytics, i18n, or contact form.
+- **Machine and search discoverable.** Sitemap index (`/sitemap-index.xml`), `robots.txt`, and standards-compliant `llms.txt` & `llms-full.txt` generated from data models.
 - **Fast, works without JS.** Lighthouse mobile ≥ 95, small JS (GSAP + Lenis + glue), all content in server-rendered HTML, `prefers-reduced-motion` honoured with final states.
 - English only.
 - Open decision: Experience, Stack, About, and Contact sections are pending a later discussion with Paul, including the Nokia runtime chart's starting value (2h 30 measured iteration vs the CV's 2 h 15 + 7 min).
